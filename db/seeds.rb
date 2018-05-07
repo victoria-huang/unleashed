@@ -58,15 +58,10 @@ collectables.each_with_index do |collectable, i|
   oldLoc = Location.find(collectable.location_id)
   aindex = east_west.index(oldLoc.ave)
   sindex = north_south.index(oldLoc.street)
-  loc = nil
-  if rand(1...100) > 50
-    new_ave = aindex + ave > east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
-    new_str = sindex - str < north_south.length ? north_south[sindex + str] : north_south[sindex - str]
-    loc = Location.find_by(street: new_str, ave: new_ave)
-  else
-    new_ave = aindex + ave > east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
-    new_str = sindex - str < north_south.length ? north_south[sindex + str] : north_south[sindex - str]
-    loc = Location.find_by(street: new_str, ave: new_ave)
-  end
+
+  new_ave = aindex + ave >= east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
+  new_str = sindex - str < 0 ? north_south[sindex + str] : north_south[sindex - str]
+  loc = Location.find_by(street: new_str, ave: new_ave)
+
   Npc.create(name: Faker::Name.name, dialogue: "There's a #{collectable.name} #{str} street(s) away and #{ave} avenue(s) away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
 end
