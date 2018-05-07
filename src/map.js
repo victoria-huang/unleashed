@@ -5,12 +5,12 @@ var geocoder;
 function initMap() {
   definePopupClass();
 
-  geocoder = new google.maps.Geocoder();
-
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.7580348, lng: -73.991703},
     zoom: 17,
   });
+
+  geocoder = new google.maps.Geocoder();
 
   popup = new Popup(
       new google.maps.LatLng(40.758034, -73.991703),
