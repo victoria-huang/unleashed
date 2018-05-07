@@ -16,7 +16,9 @@ north_south = ['14th St', '15th St', '16th St', '17th St', '18th St', '19th St',
 
 north_south.each do |street|
   east_west.each do |ave|
-    Location.create(street: street, ave: ave)
+    if !(street == '27th St' && (ave == '9th Avenue' || ave == '8th Avenue'))
+      Location.create(street: street, ave: ave)
+    end
   end
 end
 
@@ -32,13 +34,13 @@ c7 = DogCollectable.create(name: 'Tennis Ball', img: '', location_id: 167)
 c8 = DogCollectable.create(name: 'Stick', img: '', location_id: 141)
 c9 = DogCollectable.create(name: 'Dog Tag', img: '', location_id: 116)
 
-c10 = DogCollectable.create(name: 'Annoyingly Loud Chew Toy', img: '', location_id: 223)
-c11 = DogCollectable.create(name: 'Soft Chew Toy', img: '', location_id: 205)
-c12 = DogCollectable.create(name: 'Crinkly Chew Toy', img: '', location_id: 34)
-
-c13 = DogCollectable.create(name: 'Woody Costume', img: '', location_id: 12)
-c14 = DogCollectable.create(name: 'School Girl Costume', img: '', location_id: 208)
-
+c10 = DogCollectable.create(name: 'Annoyingly Loud Chew Toy', img: '', location_id: 153)
+# c11 = DogCollectable.create(name: 'Soft Chew Toy', img: '', location_id: 205)
+# c12 = DogCollectable.create(name: 'Crinkly Chew Toy', img: '', location_id: 34)
+#
+# c13 = DogCollectable.create(name: 'Woody Costume', img: '', location_id: 12)
+# c14 = DogCollectable.create(name: 'School Girl Costume', img: '', location_id: 208)
+#
 # c15 = DogCollectable.create(name: 'A pair of socks', img: '', location_id: 204)
 # c16 = DogCollectable.create(name: 'A pair of socks', img: '', location_id: 223)
 #
@@ -48,7 +50,7 @@ c14 = DogCollectable.create(name: 'School Girl Costume', img: '', location_id: 2
 # c19 = DogCollectable.create(name: 'Annoying Dog', img: 'app/assets/images/dogs/annoying.gif', location_id: 36)
 # c20 = DogCollectable.create(name: 'Lana Del Corgi', img: 'app/assets/images/dogs/corgi.gif', location_id: 270)
 
-collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
+collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
 
 collectables.each_with_index do |collectable, i|
   str = rand(1...5)
