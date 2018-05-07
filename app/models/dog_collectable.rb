@@ -1,0 +1,2 @@
+class DogCollectable < ApplicationRecord
+end

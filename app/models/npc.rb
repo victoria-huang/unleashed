@@ -1,0 +1,2 @@
+class Npcs < ApplicationRecord
+end

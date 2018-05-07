@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+Npc.delete_all
+DogCollectable.delete_all
+Location.delete_all
+
+# vicky = Npc.create(name: "vicky", dialogue: "There's a ")
+#
