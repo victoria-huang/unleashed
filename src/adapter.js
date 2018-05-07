@@ -16,7 +16,7 @@ class Adapter {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     }).then(res => res.json());
@@ -27,7 +27,7 @@ class Adapter {
       method: 'PATCH',
       body: JSON.stringify(body),
       headers: {
-        'Accept': 'application/json'
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     }).then(res => res.json());

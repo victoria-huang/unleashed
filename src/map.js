@@ -1,5 +1,6 @@
 var map, popup, Popup;
 var geocoder;
+
 /** Initializes the map and the custom popup. */
 function initMap() {
   definePopupClass();
@@ -90,22 +91,6 @@ function definePopupClass() {
         });
   };
 }
-
-
-
-// geocoder.geocode( { 'address': "12th st and 5th Ave"}, function(results, status) {
-//       if (status == 'OK') {
-//         map.setCenter(results[0].geometry.location);
-//         var marker = new google.maps.Marker({
-//             map: map,
-//             position: results[0].geometry.location
-//         });
-//       } else {
-//         alert('Geocode was not successful for the following reason: ' + status);
-//       }
-//     });
-
-
 
 // // circle for display
 // circle = new google.maps.Circle({center:{lat: 40.7580348, lng: -73.991703},
