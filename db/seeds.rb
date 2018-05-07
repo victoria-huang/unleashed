@@ -21,20 +21,22 @@ north_south.each do |street|
     end
   end
 end
+# offset =
+# rand_record = Location.offset(rand(Location.count)).first.id
 
-c1 = DogCollectable.create(name: 'Peanut Butter Biscuit', img: '', location_id: 29)
-c2 = DogCollectable.create(name: 'Chicken Biscuit', img: '', location_id: 217)
-c3 = DogCollectable.create(name: 'Milk Biscuit', img: '', location_id: 104)
+c1 = DogCollectable.create(name: 'Peanut Butter Biscuit', img: '', location_id: Location.offset(rand(Location.count)).first.id)
+c2 = DogCollectable.create(name: 'Chicken Biscuit', img: '', location_id: Location.offset(rand(Location.count)).first.id)
+c3 = DogCollectable.create(name: 'Milk Biscuit', img: '', location_id: Location.offset(rand(Location.count)).first.id)
 
-c4 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: 21)
-c5 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: 176)
-c6 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: 95)
+c4 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: Location.offset(rand(Location.count)).first.id)
+c5 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: Location.offset(rand(Location.count)).first.id)
+c6 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: Location.offset(rand(Location.count)).first.id)
 
-c7 = DogCollectable.create(name: 'Tennis Ball', img: '', location_id: 167)
-c8 = DogCollectable.create(name: 'Stick', img: '', location_id: 141)
-c9 = DogCollectable.create(name: 'Dog Tag', img: '', location_id: 116)
+c7 = DogCollectable.create(name: 'Tennis Ball', img: '', location_id: Location.offset(rand(Location.count)).first.id)
+c8 = DogCollectable.create(name: 'Stick', img: '', location_id: Location.offset(rand(Location.count)).first.id)
+c9 = DogCollectable.create(name: 'Dog Tag', img: '', location_id: Location.offset(rand(Location.count)).first.id)
 
-c10 = DogCollectable.create(name: 'Annoyingly Loud Chew Toy', img: '', location_id: 153)
+c10 = DogCollectable.create(name: 'Annoyingly Loud Chew Toy', img: '', location_id: Location.offset(rand(Location.count)).first.id)
 # c11 = DogCollectable.create(name: 'Soft Chew Toy', img: '', location_id: 205)
 # c12 = DogCollectable.create(name: 'Crinkly Chew Toy', img: '', location_id: 34)
 #
@@ -62,7 +64,10 @@ collectables.each_with_index do |collectable, i|
 
   new_ave = aindex + ave >= east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
   new_str = sindex - str < 0 ? north_south[sindex + str] : north_south[sindex - str]
+  while new_str  == '27th St' && (new_ave == '9th Avenue' || new_ave == '8th Avenue')
+    new_ave = aindex + ave >= east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
+    new_str = sindex - str < 0 ? north_south[sindex + str] : north_south[sindex - str]
+  end
   loc = Location.find_by(street: new_str, ave: new_ave)
-
-  Npc.create(name: Faker::Name.name, dialogue: "There's a(n) #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
+  Npc.create(name: Faker::Name.name, dialogue: "There's a(n) #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
 end
