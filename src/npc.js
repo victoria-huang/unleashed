@@ -20,13 +20,12 @@ class Npc {
 
     geocoder.geocode( {'address': `${street} and ${ave}, New York, NY`}, function(results, status) {
       if (status == 'OK') {
-        map.setCenter({lat: 40.7580348, lng: -73.991703});
+        map.setCenter({lat: 40.758428, lng: -73.992645});
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             icon: icon
         });
-        console.log(marker.position)
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }

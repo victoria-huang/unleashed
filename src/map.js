@@ -6,7 +6,7 @@ function initMap() {
   definePopupClass();
 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.7580348, lng: -73.991703},
+    center: {lat: 40.758428, lng: -73.992645},
     zoom: 17,
     keyboardShortcuts: false
   });
@@ -14,7 +14,7 @@ function initMap() {
   geocoder = new google.maps.Geocoder();
 
   popup = new Popup(
-      new google.maps.LatLng(40.758034, -73.991703),
+      new google.maps.LatLng(40.758428, -73.992645),
       document.getElementById('content'));
   popup.setMap(map);
 }
