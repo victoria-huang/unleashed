@@ -11,9 +11,7 @@ Npc.delete_all
 DogCollectable.delete_all
 Location.delete_all
 
-# vicky = Npc.create(name: "vicky", dialogue: "There's a ")
-
-east_west = ['1st Avenue', '2nd Avenue', '3rd Avenue', 'Lexington Avenue', 'Park Avenue', '5th Avenue', '6th Avenue']
+east_west = ['1st Avenue', '2nd Avenue', '3rd Avenue', '5th Avenue', '6th Avenue', '7th Avenue', '8th Avenue', '9th Avenue']
 north_south = ['2nd St', '3rd St', '4th St', '5th St', '6th St', '7th St', '8th St', '9th St', '10th St', '11th St', '12th St', '13th St', '14th St', '15th St', '16th St', '17th St', '18th St', '19th St', '20th St', '21st St', '22nd St', '23rd St', '24th St', '25th St', '26th St', '27th St', '28th St', '29th St', '30th St', '31st St', '32nd St', '33rd St', '34th St', '35th St', '36th St', '37th St', '38th St', '40th St', '41st St', '42nd St']
 
 north_south.each do |street|
@@ -55,7 +53,7 @@ collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15
 collectables.each_with_index do |collectable, i|
   str = rand(1...5)
   ave = rand(1...5)
-  
+
   oldLoc = Location.find(collectable.location_id)
   aindex = east_west.index(oldLoc.ave)
   sindex = north_south.index(oldLoc.street)
@@ -64,5 +62,5 @@ collectables.each_with_index do |collectable, i|
   new_str = sindex - str < 0 ? north_south[sindex + str] : north_south[sindex - str]
   loc = Location.find_by(street: new_str, ave: new_ave)
 
-  Npc.create(name: Faker::Name.name, dialogue: "There's a #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
+  Npc.create(name: Faker::Name.name, dialogue: "There's a(n) #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
 end
