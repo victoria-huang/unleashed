@@ -55,6 +55,7 @@ collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15
 collectables.each_with_index do |collectable, i|
   str = rand(1...5)
   ave = rand(1...5)
+  
   oldLoc = Location.find(collectable.location_id)
   aindex = east_west.index(oldLoc.ave)
   sindex = north_south.index(oldLoc.street)
@@ -63,5 +64,5 @@ collectables.each_with_index do |collectable, i|
   new_str = sindex - str < 0 ? north_south[sindex + str] : north_south[sindex - str]
   loc = Location.find_by(street: new_str, ave: new_ave)
 
-  Npc.create(name: Faker::Name.name, dialogue: "There's a #{collectable.name} #{str} street(s) away and #{ave} avenue(s) away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
+  Npc.create(name: Faker::Name.name, dialogue: "There's a #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
 end
