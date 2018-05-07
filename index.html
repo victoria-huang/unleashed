@@ -1,59 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
   <meta charset="utf-8">
   <title>Unleashed</title>
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="stylesheet" href="src/bootstrap.min.css">
 
-  <script src="src/jquery-3.3.1.slim.min.js"></script>
-  <script src="src/popper.min.js"></script>
-
-  <script src="src/bootstrap.min.js"></script>
-
-  </head>
-
-  <body>
-
-    <ul class="nav nav-pills navbar-fixed-top">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
 
 
+</head>
+
+<body>
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Unleashed</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Checklist</a>
+        <!-- <a class="nav-item nav-link" href="#">Checklist</a> -->
+      </div>
+    </div>
+  </nav>
+
+    <div id="modal-container" class="modal" tabindex="-1" role="dialog">
+
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </div>
 
 
+    </div>
+  </div>
+  
     <div id="map"></div>
     <div id="content">
       <img style="width:50px" src="images/dog/pug.gif" />
     </div>
-    <!-- Replace the value of the key parameter with your own API key. -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBfiSV14xDaoHikWR3EfaeCvoZAP_3QUc&callback=initMap">
-    </script>
+  </div>
 
-    <script src="src/adapter.js"></script>
-    <script src="src/map.js"></script>
-    <script src="src/index.js"></script>
-    <script src="src/npc.js"></script>
-    <script src="src/dog_collectable.js"></script>
-    <script src="src/location.js"></script>
-  </body>
+  <!-- Replace the value of the key parameter with your own API key. -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBfiSV14xDaoHikWR3EfaeCvoZAP_3QUc&callback=initMap">
+  </script>
+
+  <script src="src/popper.min.js"></script>
+  <script src="src/jquery-3.3.1.slim.min.js"></script>
+  <script src="src/jquery-ui.min.js"></script>
+  <script src="src/bootstrap.min.js"></script>
+
+
+  <script src="src/adapter.js"></script>
+  <script src="src/map.js"></script>
+  <script src="src/index.js"></script>
+  <script src="src/navbar.js"></script>
+  <script src="src/npc.js"></script>
+  <script src="src/dog_collectable.js"></script>
+  <script src="src/location.js"></script>
+</body>
 
 </html>

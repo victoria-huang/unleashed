@@ -8,7 +8,8 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.7580348, lng: -73.991703},
     zoom: 17,
-    keyboardShortcuts: false
+    keyboardShortcuts: false,
+    zIndex: 1
   });
 
   geocoder = new google.maps.Geocoder();
