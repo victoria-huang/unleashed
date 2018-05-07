@@ -16,13 +16,13 @@ function getMarkers(npcs) {
 
     geocoder.geocode( {'address': `${street} and ${ave}, New York, NY`}, function(results, status) {
       if (status == 'OK') {
-        map.setCenter(results[0].geometry.location);
+        map.setCenter({lat: 40.7580348, lng: -73.991703});
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
             icon: icon
         });
-        console.log(marker)
+        console.log(marker.position)
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
