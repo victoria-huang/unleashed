@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Unleashed</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-  </head>
-  <body>
-  
+<head>
+  <meta charset="utf-8">
+  <title>Unleashed</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" href="src/bootstrap.min.css">
 
+  <script src="src/jquery-3.3.1.slim.min.js"></script>
+  <script src="src/popper.min.js"></script>
 
-    <div id="map"></div>
-    <div id="content">
-      Welcome to Unleashed!
-    </div>
-    <!-- Replace the value of the key parameter with your own API key. -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBfiSV14xDaoHikWR3EfaeCvoZAP_3QUc&callback=initMap">
-    </script>
+  <script src="src/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Active</a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Separated link</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+  </ul>
+
+  <div id="map"></div>
+  <div id="content">
+    <img style="width: 50px" src="https://i.pinimg.com/736x/cb/1e/04/cb1e04be97ac146a74dee8b7ad4106a2.jpg">
+  </div>
+  <!-- Replace the value of the key parameter with your own API key. -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBfiSV14xDaoHikWR3EfaeCvoZAP_3QUc&callback=initMap">
+  </script>
 
   <script src="src/map.js"></script>
   <script src="src/index.js"></script>
-  </body>
+</body>
+
 </html>
