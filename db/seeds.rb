@@ -11,10 +11,8 @@ Npc.delete_all
 DogCollectable.delete_all
 Location.delete_all
 
-
-
 # vicky = Npc.create(name: "vicky", dialogue: "There's a ")
-#
+
 east_west = ['1st Avenue', '2nd Avenue', '3rd Avenue', 'Lexington Avenue', 'Park Avenue', '5th Avenue', '6th Avenue']
 north_south = ['2nd St', '3rd St', '4th St', '5th St', '6th St', '7th St', '8th St', '9th St', '10th St', '11th St', '12th St', '13th St', '14th St', '15th St', '16th St', '17th St', '18th St', '19th St', '20th St', '21st St', '22nd St', '23rd St', '24th St', '25th St', '26th St', '27th St', '28th St', '29th St', '30th St', '31st St', '32nd St', '33rd St', '34th St', '35th St', '36th St', '37th St', '38th St', '40th St', '41st St', '42nd St']
 
@@ -24,51 +22,51 @@ north_south.each do |street|
   end
 end
 
-c1 = DogCollectable.create(name: "Peanut Butter Biscuit", img: "", location_id: 29)
-c2 = DogCollectable.create(name: "Chicken Biscuit", img: "", location_id: 237)
-c3 = DogCollectable.create(name: "Milk Biscuit", img: "", location_id: 104)
+c1 = DogCollectable.create(name: 'Peanut Butter Biscuit', img: '', location_id: 29)
+c2 = DogCollectable.create(name: 'Chicken Biscuit', img: '', location_id: 237)
+c3 = DogCollectable.create(name: 'Milk Biscuit', img: '', location_id: 104)
 
-c4 = DogCollectable.create(name: "Dog Bone", img: "", location_id: 21)
-c5 = DogCollectable.create(name: "Dog Bone", img: "", location_id: 176)
-c6 = DogCollectable.create(name: "Dog Bone", img: "", location_id: 95)
+c4 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: 21)
+c5 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: 176)
+c6 = DogCollectable.create(name: 'Dog Bone', img: '', location_id: 95)
 
-c7 = DogCollectable.create(name: "Tennis Ball", img: "", location_id: 167)
-c8 = DogCollectable.create(name: "Stick", img: "", location_id: 141)
-c9 = DogCollectable.create(name: "Dog Tag", img: "", location_id: 116)
+c7 = DogCollectable.create(name: 'Tennis Ball', img: '', location_id: 167)
+c8 = DogCollectable.create(name: 'Stick', img: '', location_id: 141)
+c9 = DogCollectable.create(name: 'Dog Tag', img: '', location_id: 116)
 
-c10 = DogCollectable.create(name: "Annoyingly Loud Chew Toy", img: "", location_id: 223)
-c11 = DogCollectable.create(name: "Soft Chew Toy", img: "", location_id: 275)
-c12 = DogCollectable.create(name: "Crinkly Chew Toy", img: "", location_id: 34)
+c10 = DogCollectable.create(name: 'Annoyingly Loud Chew Toy', img: '', location_id: 223)
+c11 = DogCollectable.create(name: 'Soft Chew Toy', img: '', location_id: 275)
+c12 = DogCollectable.create(name: 'Crinkly Chew Toy', img: '', location_id: 34)
 
-c13 = DogCollectable.create(name: "Woody Costume", img: "", location_id: 12)
-c14 = DogCollectable.create(name: "School Girl Costume", img: "", location_id: 280)
+c13 = DogCollectable.create(name: 'Woody Costume', img: '', location_id: 12)
+c14 = DogCollectable.create(name: 'School Girl Costume', img: '', location_id: 280)
 
-c15 = DogCollectable.create(name: "A pair of socks", img: "", location_id: 204)
-c16 = DogCollectable.create(name: "A pair of socks", img: "", location_id: 223)
+c15 = DogCollectable.create(name: 'A pair of socks', img: '', location_id: 204)
+c16 = DogCollectable.create(name: 'A pair of socks', img: '', location_id: 223)
 
-c17 = DogCollectable.create(name: "Comfy Bed", img: "", location_id: 143)
+c17 = DogCollectable.create(name: 'Comfy Bed', img: '', location_id: 143)
 
-c18 = DogCollectable.create(name: "Chase the Shiba", img: "app/assets/images/dogs/shiba.gif", location_id: 79)
-c19 = DogCollectable.create(name: "Annoying Dog", img: "app/assets/images/dogs/annoying.gif", location_id: 36)
-c20 = DogCollectable.create(name: "Lana Del Corgi", img: "app/assets/images/dogs/corgi.gif", location_id: 270)
+c18 = DogCollectable.create(name: 'Chase the Shiba', img: 'app/assets/images/dogs/shiba.gif', location_id: 79)
+c19 = DogCollectable.create(name: 'Annoying Dog', img: 'app/assets/images/dogs/annoying.gif', location_id: 36)
+c20 = DogCollectable.create(name: 'Lana Del Corgi', img: 'app/assets/images/dogs/corgi.gif', location_id: 270)
 
-collectables = [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20]
+collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20]
 
 collectables.each_with_index do |collectable, i|
   str = rand(0...2)
   ave = rand(0...2)
-    oldLoc = Location.find(collectable.location_id)
-    aindex =  east_west.index(oldLoc.ave)
-    sindex = north_south.index(oldLoc.street)
-    loc = nil
-  if(rand(1...100) > 50)
+  oldLoc = Location.find(collectable.location_id)
+  aindex = east_west.index(oldLoc.ave)
+  sindex = north_south.index(oldLoc.street)
+  loc = nil
+  if rand(1...100) > 50
     new_ave = aindex + ave > east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
-    new_str = sindex - str < north_south.length ?  north_south[sindex + str] : north_south[sindex - str]
+    new_str = sindex - str < north_south.length ? north_south[sindex + str] : north_south[sindex - str]
     loc = Location.find_by(street: new_str, ave: new_ave)
   else
     new_ave = aindex + ave > east_west.length ? east_west[aindex - ave] : east_west[aindex + ave]
-    new_str = sindex - str < north_south.length ?  north_south[sindex + str] : north_south[sindex - str]
+    new_str = sindex - str < north_south.length ? north_south[sindex + str] : north_south[sindex - str]
     loc = Location.find_by(street: new_str, ave: new_ave)
   end
-  Npc.create(name: Faker::Name.name, dialogue: "There's a #{collectable.name} #{str} street(s) away and #{ave} avenue(s) away", img: "app/assets/images/people/s#{i+1}", location_id: loc.id)
+  Npc.create(name: Faker::Name.name, dialogue: "There's a #{collectable.name} #{str} street(s) away and #{ave} avenue(s) away", img: "app/assets/images/people/s#{i + 1}", location_id: loc.id)
 end
