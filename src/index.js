@@ -5,27 +5,9 @@ const collectableAdapter = new Adapter("http://localhost:3000/api/v1/dog_collect
 let store = { npcs: [], locations: [], dogCollectables: [] }
 
 document.addEventListener('DOMContentLoaded', () => {
-  npcAdapter.getResources().then(npcs => getMarkers(npcs))
+  npcAdapter.getResources()
+  .then(npcsJSON => Npc.createNpcs(npcsJSON))
+  .then(npcs => {
+    npcs.forEach(npc => npc.getMarker())
+  });
 })
-
-function getMarkers(npcs) {
-  npcs.forEach(npc => {
-    let street = npc.location.street;
-    let ave = npc.location.ave;
-    let icon = npc.img;
-
-    geocoder.geocode( {'address': `${street} and ${ave}, New York, NY`}, function(results, status) {
-      if (status == 'OK') {
-        map.setCenter({lat: 40.7580348, lng: -73.991703});
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            icon: icon
-        });
-        console.log(marker.position)
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-  })
-}
