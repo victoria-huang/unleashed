@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         moveTo(dogLocation)
       } else{
         playWallBump()
+        outOfBounds()
       }
     } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       console.log("left/right")
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       } else{
         playWallBump()
+        outOfBounds()
       }
     }
     let item = store.dogCollectables.find(c => c.location_id === dogLocation.id)

@@ -9,7 +9,7 @@ class Location {
       store.npcs.push(new Npc(npc, this))
     })
     data.dog_collectables.forEach(collect => {
-      store.dogCollectables.push(new DogCollectable(collect))
+      store.dogCollectables.push(new DogCollectable(collect, this))
     })
     store.locations.push(this)
   }
