@@ -27,6 +27,11 @@ class Npc {
             icon: icon,
             animation: google.maps.Animation.DROP
         });
+
+        google.maps.event.addListener(marker, 'click', (event) => {
+           // if (dogLocation === marker)
+        });
+
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
       }
