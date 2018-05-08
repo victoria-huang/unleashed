@@ -8,7 +8,9 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 40.758428, lng: -73.992645},
     zoom: 17,
-    keyboardShortcuts: false
+    keyboardShortcuts: false,
+    gestureHandling: 'none',
+    zoomControl: false
   });
 
   geocoder = new google.maps.Geocoder();

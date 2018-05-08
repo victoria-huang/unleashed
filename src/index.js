@@ -41,25 +41,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function moveUp(street) {
   let streetNum = parseInt(street.replace(/\D+/g, ''));
-  let newStreetNum = ++streetNum;
+  let newStreetNum;
+
+  streetNum < 50 ? newStreetNum = ++streetNum : newStreetNum = streetNum
+
   return `${ordinalSuffix(newStreetNum)} St`
 }
 
 function moveDown(street) {
   let streetNum = parseInt(street.replace(/\D+/g, ''));
-  let newStreetNum = --streetNum;
+  let newStreetNum;
+
+  streetNum > 14 ? newStreetNum = --streetNum : newStreetNum = streetNum
+
   return `${ordinalSuffix(newStreetNum)} St`
 }
 
 function moveLeft(ave) {
   let aveNum = parseInt(ave.replace(/\D+/g, ''));
-  let newAveNum = ++aveNum;
+  let newAveNum;
+
+  if (aveNum === 3) {
+    newAveNum = aveNum + 2;
+  } else if (aveNum < 9) {
+    newAveNum = ++aveNum;
+  } else {
+    newAveNum = aveNum;
+  }
+
   return `${ordinalSuffix(newAveNum)} Avenue`
 }
 
 function moveRight(ave) {
   let aveNum = parseInt(ave.replace(/\D+/g, ''));
-  let newAveNum = --aveNum;
+  let newAveNum;
+
+  if (aveNum === 5) {
+    newAveNum = aveNum -2;
+  } else if (aveNum > 1) {
+    newAveNum = --aveNum;
+  } else {
+    newAveNum = aveNum;
+  }
+
   return `${ordinalSuffix(newAveNum)} Avenue`
 }
 
