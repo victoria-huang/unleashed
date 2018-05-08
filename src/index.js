@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // load all locations
   locationAdapter.getResources().then((locations) => {
     locations.forEach(l => new Location(l))
+  }).then(locations => {
+    console.log(store); store.npcs.forEach(npc => npc.getMarker())
   })
+
   mapInit(dogLocation)
 
   document.addEventListener('keydown', (e) => {

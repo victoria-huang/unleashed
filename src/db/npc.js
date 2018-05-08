@@ -1,9 +1,9 @@
 class Npc {
-  constructor(npc) {
+  constructor(npc, location) {
     this.name = npc.name;
     this.dialogue = npc.dialogue;
     this.img = npc.img;
-    this.location = npc.location;
+    this.location = location;
     store.npcs.push(this);
   }
 
