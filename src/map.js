@@ -26,3 +26,7 @@ function moveTo(data) {
   }).update();
   mymap.panTo(new L.LatLng(data.latitude, data.longitude));
 }
+
+function outOfBounds() {
+  myMarker.bindPopup("I can't move that way!").openPopup();
+}

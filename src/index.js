@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else{
         // play music to indicate you can't pass
         playWallBump()
+        outOfBounds()
       }
     } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       console.log("left/right")
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else{
         // play music to indicate you can't pass
         playWallBump()
+        outOfBounds()
       }
     }
   })
