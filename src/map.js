@@ -1,11 +1,19 @@
-var mymap = L.map('map').setView([40.758428, -73.992645], 17);
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoicmVkZmlzaDA3IiwiYSI6ImNqZ3hzbDNrMDI5NjUzM3Axcm90N2o2NmcifQ.HjxYG61ovRMiydlM3AkfPQ'
-}).addTo(mymap);
+var mymap = L.map('map').setView([40.739091, -73.991384], 17);
 
-var marker = L.marker([40.758428, -73.992645], {autoPan: true, autoPanSpeed: 10}).addTo(mymap);
+function init() {
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1IjoicmVkZmlzaDA3IiwiYSI6ImNqZ3hzbDNrMDI5NjUzM3Axcm90N2o2NmcifQ.HjxYG61ovRMiydlM3AkfPQ'
+  }).addTo(mymap);
+
+  var myIcon = L.icon({
+    iconUrl: 'images/dog/pug.gif',
+    iconSize: [80, 50]
+  });
+
+  var marker = L.marker([40.739091, -73.991384], {autoPan: true, autoPanSpeed: 10, icon: myIcon}).addTo(mymap);
+}
 
 // FETCH POST TO DATABASE - COORDINATES
 //     var popup = L.popup();

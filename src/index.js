@@ -28,22 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('checklist clicked');
       $('#modal-container').modal('show');
     }
-    // let div = document.createElement('div')
-    // let ul = document.createElement('ul')
-    //
-    // div.setAttribute('id', "collectables")
-    // div.appendChild(ul)
-    //
-    // store.dogCollectables.forEach((item) => {
-    //   let li = document.createElement('li')
-    //   li.innerText = item.name
-    //   ul.appendChild(li)
-    // })
-    // modal.append(div)
-
-    // modal.style.zIndex = 100;
-    // modal.innerHTML = ` `
-    // map.style.position = 'absolute';
   })
 
   npcAdapter.getResources()
