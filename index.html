@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Unleashed</title>
   <link rel="stylesheet" type="text/css" href="index.css">
-  <link rel="stylesheet" href="src/bootstrap.min.css">
+  <link rel="stylesheet" href="src/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
@@ -41,7 +41,6 @@
       </div>
       <div class="modal-body">
         <ul id="collectables">
-
         </ul>
       </div>
       <div class="modal-footer">
@@ -49,8 +48,6 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       </div>
-
-
     </div>
   </div>
 
@@ -60,23 +57,20 @@
     </div>
   </div>
 
-  <!-- Replace the value of the key parameter with your own API key. -->
-  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBfiSV14xDaoHikWR3EfaeCvoZAP_3QUc&callback=initMap">
-  </script> -->
-
-  <script src="src/popper.min.js"></script>
-  <script src="src/jquery-3.3.1.slim.min.js"></script>
-  <script src="src/jquery-ui.min.js"></script>
-  <script src="src/bootstrap.min.js"></script>
-
+  <script src="src/bootstrap/popper.min.js"></script>
+  <script src="src/bootstrap/jquery-3.3.1.slim.min.js"></script>
+  <script src="src/bootstrap/jquery-ui.min.js"></script>
+  <script src="src/bootstrap/bootstrap.min.js"></script>
 
   <script src="src/adapter.js"></script>
   <script src="src/map.js"></script>
   <script src="src/index.js"></script>
+
   <script src="src/navbar.js"></script>
-  <script src="src/npc.js"></script>
-  <script src="src/dog_collectable.js"></script>
-  <script src="src/location.js"></script>
+  <script src="src/db/npc.js"></script>
+  <script src="src/db/dog_collectable.js"></script>
+  <script src="src/db/location.js"></script>
+
 </body>
 
 </html>
