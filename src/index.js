@@ -11,6 +11,11 @@ let store = {
 
 let dogLocation = {street: "14", ave: "1", longitude: -73.9826037269086, latitude: 40.7312857466366}
 
+
+window.addEventListener("load", () => {
+  document.getElementById("overlay").style.display = "block";
+})
+
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
   const modal = document.getElementById('modal-container')
@@ -63,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function isValidMove(street, ave){
   return street < 24 && street > 13 && ave < 10 && ave > 0
+
 }
 
 function ordinalSuffix(i) {
