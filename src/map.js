@@ -30,3 +30,7 @@ function moveTo(data) {
 function outOfBounds() {
   myMarker.bindPopup("I can't move that way!").openPopup();
 }
+
+function foundItem(item) {
+  myMarker.bindPopup(`I found ${item.name}! <img src=${item.img}></img>`).openPopup();
+}
