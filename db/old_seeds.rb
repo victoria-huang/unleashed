@@ -25,19 +25,19 @@ def getRandomLocationId
   rand
 end
 
-c1 = DogCollectable.create(name: 'Peanut Butter Biscuit', img: 'images/collectables/biscuit_1.png', location_id: getRandomLocationId())
-c2 = DogCollectable.create(name: 'Soft Chew Toy', img: 'images/collectables/toy_3.png', location_id: getRandomLocationId())
-c3 = DogCollectable.create(name: 'Woody Costume', img: 'images/collectables/costume_1.png', location_id: getRandomLocationId())
+c1 = DogCollectable.create(name: 'a Peanut Butter Biscuit', img: 'images/collectables/biscuit_1.png', location_id: getRandomLocationId())
+c2 = DogCollectable.create(name: 'a Soft Chew Toy', img: 'images/collectables/toy_3.png', location_id: getRandomLocationId())
+c3 = DogCollectable.create(name: 'a Woody Costume', img: 'images/collectables/costume_1.png', location_id: getRandomLocationId())
 
-c4 = DogCollectable.create(name: 'Dog Bone', img: 'images/collectables/bone_2.png', location_id: getRandomLocationId())
-c5 = DogCollectable.create(name: 'Comfy Bed', img: 'images/collectables/dog_bed.png', location_id: getRandomLocationId())
-c6 = DogCollectable.create(name: 'Chase the Shiba', img: 'images/collectables/shiba.gif', location_id: getRandomLocationId())
+c4 = DogCollectable.create(name: 'a Dog Bone', img: 'images/collectables/bone_2.png', location_id: getRandomLocationId())
+c5 = DogCollectable.create(name: 'a Comfy Bed', img: 'images/collectables/dog_bed.png', location_id: getRandomLocationId())
+c6 = DogCollectable.create(name: 'your friend, Chase the Shiba,', img: 'images/collectables/shiba.gif', location_id: getRandomLocationId())
 
-c7 = DogCollectable.create(name: 'Tennis Ball', img: 'images/collectables/tennis_ball.png', location_id: getRandomLocationId())
-c8 = DogCollectable.create(name: 'Stick', img: 'images/collectables/stick.png', location_id: getRandomLocationId())
-c9 = DogCollectable.create(name: 'Annoying Dog', img: 'images/collectables/annoying.gif', location_id: getRandomLocationId())
+c7 = DogCollectable.create(name: 'a Tennis Ball', img: 'images/collectables/tennis_ball.png', location_id: getRandomLocationId())
+c8 = DogCollectable.create(name: 'a Stick', img: 'images/collectables/stick.png', location_id: getRandomLocationId())
+c9 = DogCollectable.create(name: 'your friend, Annoying Dog,', img: 'images/collectables/annoying.gif', location_id: getRandomLocationId())
 
-c10 = DogCollectable.create(name: 'Lana Del Corgi', img: 'images/collectables/corgi.gif', location_id: getRandomLocationId())
+c10 = DogCollectable.create(name: 'your friend, Lana Del Corgi,', img: 'images/collectables/corgi.gif', location_id: getRandomLocationId())
 
 # c11 = DogCollectable.create(name: 'Soft Chew Toy', img: '', location_id: 205)
 # c12 = DogCollectable.create(name: 'Crinkly Chew Toy', img: '', location_id: 34)
@@ -56,16 +56,14 @@ c10 = DogCollectable.create(name: 'Lana Del Corgi', img: 'images/collectables/co
 
 collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
 
-collectables.each_with_index do |collectable, i|
+def validLocation
   str = rand(1...4)
   ave = rand(1...4)
 
   oldLoc = Location.find(collectable.location_id)
   a = oldLoc.ave
   st = oldLoc.street
-  # byebug
-  # new_ave = 0
-  # new_street = 0
+
   if(Location.find_by(ave: "#{a.to_i + ave}"))
     new_ave = a.to_i + ave
   else
@@ -77,7 +75,15 @@ collectables.each_with_index do |collectable, i|
   else
     new_str = st.to_i - str
   end
+  Location.find_by(street: new_str, ave: new_ave)
+end
 
-  loc = Location.find_by(street: new_str, ave: new_ave)
+collectables.each_with_index do |collectable, i|
+
+  loc = validLocation()
+  while(DogCollectable.find_by(location_id: loc.id))
+    loc = validLocation()
+  end
+
   Npc.create(name: Faker::Name.name, dialogue: "There's a(n) #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
 end
