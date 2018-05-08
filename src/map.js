@@ -11,6 +11,7 @@ function initMap() {
     keyboardShortcuts: false,
     gestureHandling: 'none',
     zoomControl: false
+    zIndex: 1
   });
 
   geocoder = new google.maps.Geocoder();
