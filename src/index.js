@@ -9,7 +9,7 @@ let store = {
   dogCollectables: []
 }
 
-let dogLocation = {street: "14", ave: "1", longitude: -73.9826037269086, latitude: 40.7312857466366}
+let dogLocation = {id: 109, street: "14", ave: "1", longitude: -73.9826037269086, latitude: 40.7312857466366}
 
 
 window.addEventListener("load", () => {
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
   const modal = document.getElementById('modal-container')
   const list = document.getElementById('collectables')
+  const textBox = document.getElementById('text')
 
   // load all locations
   locationAdapter.getResources().then((locations) => {
@@ -38,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
         moveTo(dogLocation)
       } else{
-        // play music to indicate you can't pass
         playWallBump()
       }
     } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
@@ -47,10 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isValidMove(dogLocation.street, avenue)){
         dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
         moveTo(dogLocation)
+
       } else{
-        // play music to indicate you can't pass
         playWallBump()
       }
+    }
+    let item = store.dogCollectables.find(c => c.location_id === dogLocation.id)
+    if(item){
+      console.log(item)
+      textBox
     }
   })
 
@@ -59,20 +64,26 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('checklist clicked')
       $('#modal-container').modal('show');
     }
-
     console.log(store.dogCollectables)
     store.dogCollectables.forEach((item) => {
       let li = document.createElement('li')
       li.innerText = item.name
       list.appendChild(li)
     })
-
   })
 
 })
 
 function isValidMove(street, ave){
   return street < 24 && street > 13 && ave < 10 && ave > 0
+}
+
+function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
 }
 
 function ordinalSuffix(i) {
