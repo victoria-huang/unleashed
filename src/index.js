@@ -48,16 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isValidMove(dogLocation.street, avenue)){
         dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
         moveTo(dogLocation)
-
       } else{
         playWallBump()
         outOfBounds()
       }
     }
-    let item = store.dogCollectables.find(c => c.location_id === dogLocation.id)
+    let item = store.dogCollectables.find(c =>
+      (c.location.latitude === dogLocation.latitude && c.location.longitude === dogLocation.longitude)
+    )
+
     if(item){
-      console.log(item)
-      textBox
+      foundItem(item);
+      DogCollectable.removeItem(item);
     }
   })
 

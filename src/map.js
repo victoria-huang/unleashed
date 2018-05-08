@@ -29,8 +29,10 @@ function moveTo(data) {
 
 function outOfBounds() {
   myMarker.bindPopup("I can't move that way!").openPopup();
+  setTimeout(function(){mymap.closePopup()}, 5000)
 }
 
 function foundItem(item) {
-  myMarker.bindPopup(`I found ${item.name}! <img src=${item.img}></img>`).openPopup();
+  myMarker.bindPopup(`I found <b>${item.name}</b>! <img src=${item.img} width="50" height="50">`).openPopup();
+  setTimeout(function(){mymap.closePopup()}, 5000)
 }
