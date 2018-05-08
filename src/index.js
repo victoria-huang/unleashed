@@ -54,10 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         outOfBounds()
       }
     }
-    let item = store.dogCollectables.find(c => c.location_id === dogLocation.id)
+
+    let item = store.dogCollectables.find(c => c.location.id === dogLocation.id)
     if(item){
       console.log(item)
-      textBox
+
     }
   })
 
