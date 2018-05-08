@@ -10,7 +10,7 @@ function initMap() {
     zoom: 17,
     keyboardShortcuts: false,
     gestureHandling: 'none',
-    zoomControl: false
+    zoomControl: false,
     zIndex: 1
   });
 

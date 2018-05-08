@@ -20,73 +20,69 @@ window.addEventListener("load", () => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-      const navBar = document.getElementById('navbar')
-      const modal = document.getElementById('modal-container')
+  const navBar = document.getElementById('navbar')
+  const modal = document.getElementById('modal-container')
 
+  // event listener for checklist on nav bar
+  navBar.addEventListener('click', (e) => {
+    if (e.target.innerText === 'Checklist') {
+      console.log('checklist clicked');
+      $('#modal-container').modal('show');
+    }
+    // let div = document.createElement('div')
+    // let ul = document.createElement('ul')
+    //
+    // div.setAttribute('id', "collectables")
+    // div.appendChild(ul)
+    //
+    // store.dogCollectables.forEach((item) => {
+    //   let li = document.createElement('li')
+    //   li.innerText = item.name
+    //   ul.appendChild(li)
+    // })
+    // modal.append(div)
 
-      // event listener for checklist on nav bar
-      navBar.addEventListener('click', (e) => {
-          if (e.target.innerText === 'Checklist') {
-            console.log('checklist clicked')
-            $('#modal-container').modal('show');
-          }
-          // let div = document.createElement('div')
-          // let ul = document.createElement('ul')
-          //
-          // div.setAttribute('id', "collectables")
-          // div.appendChild(ul)
-          //
-          // store.dogCollectables.forEach((item) => {
-          //   let li = document.createElement('li')
-          //   li.innerText = item.name
-          //   ul.appendChild(li)
-          // })
-          // modal.append(div)
+    // modal.style.zIndex = 100;
+    // modal.innerHTML = ` `
+    // map.style.position = 'absolute';
+  })
 
-          // modal.style.zIndex = 100;
-          // modal.innerHTML = ` `
-          // map.style.position = 'absolute';
-        })
+  npcAdapter.getResources()
+  .then(npcsJSON => Npc.createNpcs(npcsJSON))
+  .then(npcs => {
+    npcs.forEach(npc => npc.getMarker())
+  })
+  .then(
+    document.addEventListener('keydown', (event) => {
+      const arrowKeys = {
+        '37': moveLeft(dogLocation['ave']),
+        '38': moveUp(dogLocation['street']),
+        '39': moveRight(dogLocation['ave']),
+        '40': moveDown(dogLocation['street'])
+      }
 
-        npcAdapter.getResources()
-        .then(npcsJSON => Npc.createNpcs(npcsJSON))
-        .then(npcs => {
-          npcs.forEach(npc => npc.getMarker())
-        })
-        .then(
-          document.addEventListener('keydown', (event) => {
-            const arrowKeys = {
-              '37': moveLeft(dogLocation['ave']),
-              '38': moveUp(dogLocation['street']),
-              '39': moveRight(dogLocation['ave']),
-              '40': moveDown(dogLocation['street'])
-            }
+      const keyPressed = event.which;
 
-            const keyPressed = event.which;
+      if (arrowKeys[keyPressed]) {
+        if (keyPressed === 38 || keyPressed === 40) {
+          dogLocation['street'] = arrowKeys[keyPressed];
+        } else {
+          dogLocation['ave'] = arrowKeys[keyPressed];
+        }
+      }
 
-            if (arrowKeys[keyPressed]) {
-              if (keyPressed === 38 || keyPressed === 40) {
-                dogLocation['street'] = arrowKeys[keyPressed];
-              } else {
-                dogLocation['ave'] = arrowKeys[keyPressed];
-              }
-            }
+      geocoder.geocode({
+        'address': `${dogLocation['street']} and ${dogLocation['ave']}, New York, NY`
+      }, function(results, status) {
+        map.setCenter(results[0].geometry.location);
+        popup = new Popup(
+          new google.maps.LatLng({
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+          }),
+          document.getElementById('content'));
 
-            geocoder.geocode({
-              'address': `${dogLocation['street']} and ${dogLocation['ave']}, New York, NY`
-            }, function(results, status) {
-              map.setCenter(results[0].geometry.location);
-              popup = new Popup(
-                new google.maps.LatLng({
-                  lat: results[0].geometry.location.lat(),
-                  lng: results[0].geometry.location.lng()
-                }),
-                document.getElementById('content'));
-              popup.setMap(map);
-            })
-
-          })
-        );
+        popup.setMap(map);
       })
     })
   );
