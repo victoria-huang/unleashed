@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         moveTo(dogLocation)
       } else{
         // play music to indicate you can't pass
+        playWallBump()
       }
     } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
       console.log("left/right")
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         moveTo(dogLocation)
       } else{
         // play music to indicate you can't pass
+        playWallBump()
       }
     }
   })
@@ -71,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function isValidMove(street, ave){
   return street < 24 && street > 13 && ave < 10 && ave > 0
-
 }
 
 function ordinalSuffix(i) {
