@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2018_05_07_151108) do
   create_table "locations", force: :cascade do |t|
     t.string "street"
     t.string "ave"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "npcs", force: :cascade do |t|

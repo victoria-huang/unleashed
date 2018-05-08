@@ -28,7 +28,7 @@ class Api::V1::LocationsController < ApplicationController
 
   private
   def location_params
-    params.permit(:street, :ave)
+    params.permit(:street, :ave, :latitude, :longitude)
   end
 
   def set_location
