@@ -13,7 +13,7 @@ function mapInit(data) {
   // debugger
 
   var myIcon = L.icon({
-    iconUrl: 'images/dog/pug.gif',
+    iconUrl: 'images/dog/pug2.gif',
     iconSize: [80, 50]
   });
   myMarker = L.marker([data.latitude, data.longitude], {autoPan: true, autoPanSpeed: 10, icon: myIcon}).addTo(mymap)
