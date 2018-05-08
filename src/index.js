@@ -9,10 +9,8 @@ let store = {
   dogCollectables: []
 }
 
-let dogLocation = {
-  street: '42nd St',
-  ave: '9th Avenue'
-}
+let dogLocation = {street: "14", ave: "1", longitude: -73.9826037269086, latitude: 40.7312857466366}
+
 
 window.addEventListener("load", () => {
   document.getElementById("overlay").style.display = "block";
@@ -21,102 +19,56 @@ window.addEventListener("load", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
   const modal = document.getElementById('modal-container')
+  const list = document.getElementById('collectables')
 
-  // event listener for checklist on nav bar
-  navBar.addEventListener('click', (e) => {
-    if (e.target.innerText === 'Checklist') {
-      console.log('checklist clicked');
-      $('#modal-container').modal('show');
+  // load all locations
+  locationAdapter.getResources().then((locations) => {
+    locations.forEach(l => new Location(l))
+  })
+  mapInit(dogLocation)
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      let street = e.key === "ArrowDown" ? parseInt(dogLocation.street) - 1 : parseInt(dogLocation.street) + 1
+      console.log("down/up")
+      if (isValidMove(street, dogLocation.ave)){
+        dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
+        moveTo(dogLocation)
+      } else{
+        // play music to indicate you can't pass
+      }
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      console.log("left/right")
+      let avenue = e.key === "ArrowLeft" ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
+      if (isValidMove(dogLocation.street, avenue)){
+        dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
+        moveTo(dogLocation)
+      } else{
+        // play music to indicate you can't pass
+      }
     }
   })
 
-  npcAdapter.getResources()
-  .then(npcsJSON => Npc.createNpcs(npcsJSON))
-  .then(npcs => {
-    npcs.forEach(npc => npc.getMarker())
-  })
-  .then(
-    document.addEventListener('keydown', (event) => {
-      const arrowKeys = {
-        '37': moveLeft(dogLocation['ave']),
-        '38': moveUp(dogLocation['street']),
-        '39': moveRight(dogLocation['ave']),
-        '40': moveDown(dogLocation['street'])
-      }
+  navBar.addEventListener('click', (e) => {
+    if (e.target.innerText === 'Checklist') {
+      console.log('checklist clicked')
+      $('#modal-container').modal('show');
+    }
 
-      const keyPressed = event.which;
-
-      if (arrowKeys[keyPressed]) {
-        if (keyPressed === 38 || keyPressed === 40) {
-          dogLocation['street'] = arrowKeys[keyPressed];
-        } else {
-          dogLocation['ave'] = arrowKeys[keyPressed];
-        }
-      }
-
-      geocoder.geocode({
-        'address': `${dogLocation['street']} and ${dogLocation['ave']}, New York, NY`
-      }, function(results, status) {
-        map.setCenter(results[0].geometry.location);
-        popup = new Popup(
-          new google.maps.LatLng({
-            lat: results[0].geometry.location.lat(),
-            lng: results[0].geometry.location.lng()
-          }),
-          document.getElementById('content'));
-
-        popup.setMap(map);
-      })
+    console.log(store.dogCollectables)
+    store.dogCollectables.forEach((item) => {
+      let li = document.createElement('li')
+      li.innerText = item.name
+      list.appendChild(li)
     })
-  );
+
+  })
+
 })
 
-function moveUp(street) {
-  let streetNum = parseInt(street.replace(/\D+/g, ''));
-  let newStreetNum;
+function isValidMove(street, ave){
+  return street < 24 && street > 13 && ave < 10 && ave > 0
 
-  streetNum < 50 ? newStreetNum = ++streetNum : newStreetNum = streetNum
-
-  return `${ordinalSuffix(newStreetNum)} St`
-}
-
-function moveDown(street) {
-  let streetNum = parseInt(street.replace(/\D+/g, ''));
-  let newStreetNum;
-
-  streetNum > 14 ? newStreetNum = --streetNum : newStreetNum = streetNum
-
-  return `${ordinalSuffix(newStreetNum)} St`
-}
-
-function moveLeft(ave) {
-  let aveNum = parseInt(ave.replace(/\D+/g, ''));
-  let newAveNum;
-
-  if (aveNum === 3) {
-    newAveNum = aveNum + 2;
-  } else if (aveNum < 9) {
-    newAveNum = ++aveNum;
-  } else {
-    newAveNum = aveNum;
-  }
-
-  return `${ordinalSuffix(newAveNum)} Avenue`
-}
-
-function moveRight(ave) {
-  let aveNum = parseInt(ave.replace(/\D+/g, ''));
-  let newAveNum;
-
-  if (aveNum === 5) {
-    newAveNum = aveNum -2;
-  } else if (aveNum > 1) {
-    newAveNum = --aveNum;
-  } else {
-    newAveNum = aveNum;
-  }
-
-  return `${ordinalSuffix(newAveNum)} Avenue`
 }
 
 function ordinalSuffix(i) {
@@ -133,88 +85,3 @@ function ordinalSuffix(i) {
   }
   return i + "th";
 }
-//       const navBar = document.getElementById('navbar')
-//       const modal = document.getElementById('modal-container')
-//       const list = document.getElementById('collectables')
-//
-//       //
-//       // npcAdapter.getResources()
-//       //   .then(npcsJSON => Npc.createNpcs(npcsJSON))
-//         // .then(npcs => {
-//         //   // npcs.forEach(npc => npc.getMarker())
-//         // })
-//         // .then(
-//         //   document.addEventListener('keydown', (event) => {
-//         //       const arrowKeys = {
-//         //         '37': moveLeft(dogLocation['ave']),
-//         //         '38': moveUp(dogLocation['street']),
-//         //         '39': moveRight(dogLocation['ave']),
-//         //         '40': moveDown(dogLocation['street'])
-//         //       }
-//         //
-//         //       const keyPressed = event.which;
-//         //
-//         //       if (arrowKeys[keyPressed]) {
-//         //         if (keyPressed === 38 || keyPressed === 40) {
-//         //           dogLocation['street'] = arrowKeys[keyPressed];
-//         //         } else {
-//         //           dogLocation['ave'] = arrowKeys[keyPressed];
-//         //         }
-//         //       }
-//         //
-//         //
-//         //       navBar.addEventListener('click', (e) => {
-//         //         if (e.target.innerText === 'Checklist') {
-//         //           console.log('checklist clicked')
-//         //           $('#modal-container').modal('show');
-//         //         }
-//         //
-//         //         console.log(store.dogCollectables)
-//         //         store.dogCollectables.forEach((item) => {
-//         //           let li = document.createElement('li')
-//         //           li.innerText = item.name
-//         //           list.appendChild(li)
-//         //         })
-//         //
-//         //       })
-//           //   }
-//           // ))
-// })
-//       function moveUp(street) {
-//         let streetNum = parseInt(street.replace(/\D+/g, ''));
-//         let newStreetNum = ++streetNum;
-//         return `${ordinalSuffix(newStreetNum)} St`
-//       }
-//
-//       function moveDown(street) {
-//         let streetNum = parseInt(street.replace(/\D+/g, ''));
-//         let newStreetNum = --streetNum;
-//         return `${ordinalSuffix(newStreetNum)} St`
-//       }
-//
-//       function moveLeft(ave) {
-//         let aveNum = parseInt(ave.replace(/\D+/g, ''));
-//         let newAveNum = ++aveNum;
-//         return `${ordinalSuffix(newAveNum)} Avenue`
-//       }
-//
-//       function moveRight(ave) {
-//         let aveNum = parseInt(ave.replace(/\D+/g, ''));
-//         let newAveNum = --aveNum;
-//         return `${ordinalSuffix(newAveNum)} Avenue`
-//       }
-//
-//       function ordinalSuffix(i) {
-//         var j = i % 10,
-//           k = i % 100;
-//         if (j == 1 && k != 11) {
-//           return i + "st";
-//         }
-//         if (j == 2 && k != 12) {
-//           return i + "nd";
-//         }
-//         if (j == 3 && k != 13) {
-//           return i + "rd";
-//         }
-//         return i + "th";
-//       }

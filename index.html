@@ -32,7 +32,7 @@
   <div id="overlay" onclick="off()">
     <div id="overlay-text">
       <h1>U N L E A S H E D</h1>
-      <h3>Click <button id="begin-game" onclick="init()">here</button> to play!</h3>
+      <h3>Click anywhere to play!</h3>
     </div>
   </div>
   <!-- <div style="padding:20px">
@@ -61,11 +61,17 @@
     </div>
   </div>
 
-  <div id="map"></div>
-  <div id="content">
-    <img style="width:50px" src="images/dog/pug.gif" />
-  </div>
 
+    <div id="map"></div>
+    <!-- <div id="content">
+      <img style="width:50px" src="images/dog/pug.gif" />
+    </div> -->
+  </div>
+  <!-- <script src="src/movingMarker.js"></script> -->
+  <script src="src/bootstrap/popper.min.js"></script>
+  <script src="src/bootstrap/jquery-3.3.1.slim.min.js"></script>
+  <script src="src/bootstrap/jquery-ui.min.js"></script>
+  <script src="src/bootstrap/bootstrap.min.js"></script>
   <script>
   function on() {
       document.getElementById("overlay").style.display = "block";
