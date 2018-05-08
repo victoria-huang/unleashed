@@ -4,6 +4,12 @@
 #map {
   height: 94%;
 }
+#modal-container {
+  width: 325px;
+  height:650px;
+  padding:0;
+  margin:0;
+}
 
 /* Optional: Makes the sample page fill the window. */
 html, body {
