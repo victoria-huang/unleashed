@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   npcAdapter.getResources()
     .then(npcsJSON => Npc.createNpcs(npcsJSON))
     .then(npcs => {
-      npcs.forEach(npc => npc.getMarker())
+      // npcs.forEach(npc => npc.getMarker())
     })
     .then(
       document.addEventListener('keydown', (event) => {

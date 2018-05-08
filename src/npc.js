@@ -17,18 +17,19 @@ class Npc {
     let street = this.location.street;
     let ave = this.location.ave;
     let icon = this.img;
+    let marker = L.icon({
+    iconUrl: this.img,
 
-    geocoder.geocode( {'address': `${street} and ${ave}, New York, NY`}, function(results, status) {
-      if (status == 'OK') {
-        map.setCenter({lat: 40.758428, lng: -73.992645});
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location,
-            icon: icon
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
+
+    var geocoder = L.Control.geocoder()
+    .on('markgeocode', function(event) {
+        var center = event.geocode.center;
+        L.marker(center).addTo(map);
+        map.setView(center, map.getZoom());
+        L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map);
+    })
+    .addTo(map);
+
     });
   }
 }
