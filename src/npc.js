@@ -24,7 +24,8 @@ class Npc {
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
-            icon: icon
+            icon: icon,
+            animation: google.maps.Animation.DROP
         });
       } else {
         alert('Geocode was not successful for the following reason: ' + status);

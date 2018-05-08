@@ -37,15 +37,33 @@
       </li>
     </ul>
 
-
-
+    <div id="overlay" onclick="off()">
+      <div id="overlay-text">
+        <h1>U N L E A S H E D</h1>
+        <h3>Click Anywhere to Play!</h3>
+      </div>
+    </div>
+    <!-- <div style="padding:20px">
+      <button onclick="on()">Turn on overlay effect</button>
+    </div> -->
 
     <div id="map"></div>
     <div id="content">
       <img style="width:50px" src="images/dog/pug.gif" />
     </div>
+
     <!-- Replace the value of the key parameter with your own API key. -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBfiSV14xDaoHikWR3EfaeCvoZAP_3QUc&callback=initMap">
+    </script>
+
+    <script>
+    function on() {
+        document.getElementById("overlay").style.display = "block";
+    }
+
+    function off() {
+        document.getElementById("overlay").style.display = "none";
+    }
     </script>
 
     <script src="src/adapter.js"></script>

@@ -5,6 +5,10 @@ const collectableAdapter = new Adapter("http://localhost:3000/api/v1/dog_collect
 let store = { inventory: [], npcs: [], locations: [], dogCollectables: [] }
 let dogLocation = { street: '42nd St', ave: '9th Avenue' }
 
+window.addEventListener("load", () => {
+  document.getElementById("overlay").style.display = "block";
+})
+
 document.addEventListener('DOMContentLoaded', () => {
   npcAdapter.getResources()
   .then(npcsJSON => Npc.createNpcs(npcsJSON))
