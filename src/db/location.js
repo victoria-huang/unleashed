@@ -1,5 +1,6 @@
 class Location {
   constructor(data){
+    this.id = data.id
     this.street = data.street
     this.ave = data.ave
     this.longitude = data.longitude
