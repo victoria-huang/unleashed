@@ -14,6 +14,15 @@ let dogLocation = {}
 
 window.addEventListener("load", () => {
   document.getElementById("overlay").style.display = "block";
+//   document.getElementById("title").animate([
+//   // keyframes
+//   { transform: 'translateX(0px)' },
+//   { transform: 'translateX(-300px)' }
+// ], {
+//   // timing options
+//   duration: 3000,
+//   iterations: 1
+// });
 })
 
 document.addEventListener('DOMContentLoaded', () => {
