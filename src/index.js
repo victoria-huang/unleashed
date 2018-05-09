@@ -116,7 +116,7 @@ function checkOnStep(textBox) {
 }
 
 function isValidMove(street, ave) {
-  return street < 24 && street > 13 && ave < 10 && ave > 0
+  return street < 51 && street > 13 && ave < 10 && ave > 0
 }
 
 function on() {
