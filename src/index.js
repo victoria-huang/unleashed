@@ -4,7 +4,6 @@ const collectableAdapter = new Adapter("http://localhost:3000/api/v1/dog_collect
 let stop = false;
 
 let store = {
-  inventory: [],
   npcs: [],
   locations: [],
   dogCollectables: []
@@ -26,7 +25,7 @@ window.addEventListener("load", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
   const modal = document.getElementById('modal-container')
-  const inventory = document.getElementById('collectables')
+  const checklist = document.getElementById('collectables')
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
 
@@ -35,7 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
   locationAdapter.getResources().then((locations) => {
     locations.forEach(l => new Location(l))
   }).then(locations => {
-    console.log(store);
+    store.dogCollectables.forEach((item) => {
+      let div = document.createElement('div')
+      div.setAttribute('id', `item-id-${item.id}`)
+      div.setAttribute('class', 'main-img')
+      div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
+      checklist.appendChild(div)
+    })
     store.npcs.forEach(npc => npc.getMarker())
   })
 
@@ -67,21 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-
-
-
   })
 
   navBar.addEventListener('click', (e) => {
     if (e.target.innerText === 'Checklist') {
       $('#modal-container').modal('show');
     }
-    // console.log(store.dogCollectables)
-    // store.dogCollectables.forEach((item) => {
-    //   let div = document.createElement('div')
-    //   div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
-    //   inventory.appendChild(div)
-    // })
   })
 
 })
@@ -93,7 +89,7 @@ function checkOnStep(textBox) {
   )
   if (item) {
     foundItem(item);
-    item.addToInventory();
+    item.checkOff();
     DogCollectable.removeItem(item);
   }
 

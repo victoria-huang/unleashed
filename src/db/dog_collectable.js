@@ -6,11 +6,9 @@ class DogCollectable {
     this.location = location
   }
 
-  addToInventory() {
-    const inventory = document.getElementById('collectables')
-    let div = document.createElement('div')
-    div.innerHTML = `<img src=${this.img} width="60" height="50"><br>${this.name}`
-    inventory.appendChild(div)
+  checkOff() {
+    let imgDiv = document.getElementById(`item-id-${this.id}`)
+    imgDiv.innerHTML += "<img class='inlay' src='images/other/check_mark.png' width='40' height='40'>"
   }
 
   static removeItem(item) {
