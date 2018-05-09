@@ -26,6 +26,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  font-family: 'Press Start 2P', cursive;
   font-size: 50px;
   color: white;
   transform: translate(-50%, -50%);
@@ -114,8 +115,8 @@ html, body {
 
 #tutorial {
   overflow-y: scroll;
-  height: 300px;
-  width: 400px;
+  height: 280px;
+  width: 600px;
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
