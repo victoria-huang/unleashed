@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
 
+  playBg()
 
   // load all locations
   locationAdapter.getResources().then((locations) => {

@@ -42,9 +42,8 @@
 }
 
 .fadeout-npc {
-  /* background-color: black; */
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
 #npc {
@@ -124,12 +123,15 @@ html, body {
   outline: dashed;
 }
 
-.leaflet-marker-icon,
-.leaflet-marker-shadow {
-  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 2s; /* Firefox < 16 */
-  -ms-animation: fadein 2s; /* Internet Explorer */
-  -o-animation: fadein 2s; /* Opera < 12.1 */
+.leaflet-marker-icon, .leaflet-marker-shadow {
+  -webkit-animation: fadein 2s;
+  /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s;
+  /* Firefox < 16 */
+  -ms-animation: fadein 2s;
+  /* Internet Explorer */
+  -o-animation: fadein 2s;
+  /* Opera < 12.1 */
   animation: fadein 2s;
 }
 
@@ -142,12 +144,12 @@ html, body {
   }
 }
 
-.main-img{
-    position:relative;
+.main-img {
+  position: relative;
 }
 
-.inlay{
-    position:absolute;
-    top:40px;
-    right:50px;
+.inlay {
+  position: absolute;
+  top: 40px;
+  right: 50px;
 }
