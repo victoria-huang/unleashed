@@ -37,17 +37,40 @@
 }
 
 .invisible {
-  visibility: hidden;
+  visibility: visible;
 }
+
+#npc{
+  width: 100%;
+  height: 40%;
+  bottom: 2em;
+  position:absolute;
+  z-index: 10001;
+}
+
 
 #text {
   width: 100%;
-  height: 25%;
+  height: 40%;
   bottom: 0;
   position: absolute;
   z-index: 10000;
   background-color: white;
-  /* display:block;   */
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  padding: 2em;
+  opacity: 0.9;
+}
+
+.style-dialogue {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
+}
+
+.style-name-tag {
+  /* font-size: 2em; */
+  padding-top: .5em;
+  font-family: 'Gothic A1', sans-serif;
 }
 
 #map {

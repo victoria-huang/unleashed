@@ -9,7 +9,13 @@ let store = {
   dogCollectables: []
 }
 
-let dogLocation = {id: 109, street: "14", ave: "1", longitude: -73.9826037269086, latitude: 40.7312857466366}
+let dogLocation = {
+  id: 109,
+  street: "14",
+  ave: "1",
+  longitude: -73.9826037269086,
+  latitude: 40.7312857466366
+}
 
 
 window.addEventListener("load", () => {
@@ -21,45 +27,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('modal-container')
   const list = document.getElementById('collectables')
   const textBox = document.getElementById('text')
+  const npcBox = document.getElementById('npc')
 
   // load all locations
   locationAdapter.getResources().then((locations) => {
     locations.forEach(l => new Location(l))
   }).then(locations => {
-    console.log(store); store.npcs.forEach(npc => npc.getMarker())
+    console.log(store);
+    store.npcs.forEach(npc => npc.getMarker())
   })
 
   mapInit(dogLocation)
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keyup', (e) => {
+    let press = false;
+    textBox.className = "invisible"
+    npcBox.className = "invisible"
     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
       let street = e.key === "ArrowDown" ? parseInt(dogLocation.street) - 1 : parseInt(dogLocation.street) + 1
-      console.log("down/up")
-      if (isValidMove(street, dogLocation.ave)){
+      if (isValidMove(street, dogLocation.ave)) {
         dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
         moveTo(dogLocation)
-      } else{
+        checkOnStep(textBox, npcBox)
+      } else {
         playWallBump()
         outOfBounds()
       }
     } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-      console.log("left/right")
       let avenue = e.key === "ArrowLeft" ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
-      if (isValidMove(dogLocation.street, avenue)){
+      if (isValidMove(dogLocation.street, avenue)) {
         dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
         moveTo(dogLocation)
-
-      } else{
+        checkOnStep(textBox, npcBox)
+      } else {
         playWallBump()
         outOfBounds()
       }
     }
 
-    let item = store.dogCollectables.find(c => c.location.id === dogLocation.id)
-    if(item){
-      console.log(item)
 
-    }
+
   })
 
   navBar.addEventListener('click', (e) => {
@@ -77,16 +84,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-function isValidMove(street, ave){
+function checkOnStep(textBox){
+  let item = store.dogCollectables.find(c => c.location.id === dogLocation.id)
+  if (item) {
+    console.log(item)
+  }
+  let npc = store.npcs.find(c => c.location.id === dogLocation.id)
+  if (npc) {
+    console.log(npc)
+
+    //load text
+    textBox.className = "visible "
+    textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
+    let slowText = document.getElementById('slow-text')
+    showText(slowText, npc.dialogue, 0, 75);
+
+  }
+}
+
+function isValidMove(street, ave) {
   return street < 24 && street > 13 && ave < 10 && ave > 0
 }
 
 function on() {
-    document.getElementById("overlay").style.display = "block";
+  document.getElementById("overlay").style.display = "block";
 }
 
 function off() {
-    document.getElementById("overlay").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+}
+
+function showText(target, message, index, interval) {
+  if (index < message.length) {
+    $(target).append(message[index++]);
+    setTimeout(function() {
+      showText(target, message, index, interval);
+    }, interval);
+  }
 }
 
 function ordinalSuffix(i) {
