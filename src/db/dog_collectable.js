@@ -8,7 +8,7 @@ class DogCollectable {
 
   checkOff() {
     let imgDiv = document.getElementById(`item-id-${this.id}`)
-    imgDiv.innerHTML += "<img class='inlay' src='images/other/check_mark.png' width='40' height='40'>"
+    imgDiv.innerHTML += "<img class='inlay' src='https://dl.dropboxusercontent.com/s/5ziysnzn31kutph/check_mark.png?dl=0' width='40' height='40'>"
   }
 
   static removeItem(item) {
