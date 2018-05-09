@@ -17,7 +17,7 @@ let dogLocation = {
   latitude: 40.7312857466366
 }
 
-// 
+//
 // window.addEventListener("load", () => {
 //   document.getElementById("overlay").style.display = "block";
 // })

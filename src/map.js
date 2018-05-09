@@ -12,62 +12,25 @@ function mapInit(data) {
   }).addTo(mymap);
   var popup = L.popup();
 
-  function onMapClick(e) {
-      popup
-          .setLatLng(e.latlng)
+  let st = 31
+  let av = 1;
 
-      fetch('localhost:3000/locations', {
+  function onMapClick(e) {
+    console.log(e.latlng)
+      fetch('http://localhost:3000/api/v1/locations', {
         method: 'POST',
-        
-      })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({street: `${st}`, ave: `${av}`, latitude: e.latlng.lat, longitude: e.latlng.lng})
+      }).then(r=>r.json()).then(console.log)
+      // console.log(av+"ave, "+" street: "+st)
+      if(av === 9){
+        av=1
+        st ++
+      }else{
+        av++
+      }
   }
 
   mymap.on('click', onMapClick);
 
 }
-//
-// function moveTo(data) {
-//   myMarker.setLatLng([data.latitude, data.longitude], {
-//     draggable: 'true'
-//   }).update();
-//   mymap.panTo(new L.LatLng(data.latitude, data.longitude));
-// }
-//
-// function outOfBounds() {
-//   myMarker.bindPopup("I can't move that way!").openPopup();
-//   setTimeout(function() {
-//     mymap.closePopup()
-//   }, 2000)
-// }
-//
-// function foundItem(item) {
-//   playGetCollectableNoise()
-//
-//   let itemIcon = L.icon({
-//     iconUrl: `${item.img}`,
-//     iconSize: [50, 50]
-//   })
-//
-//   myMarker.bindPopup(`I found <b>${item.name}</b>! <img src=${item.img} width="50" height="50">`).openPopup();
-//   setTimeout(() => mymap.closePopup(), 1300)
-//
-//   L.marker([dogLocation.latitude, dogLocation.longitude], {
-//     icon: itemIcon
-//   }).addTo(mymap);
-//
-//   stop = true
-//   setTimeout(() => {
-//     stop = false
-//   }, 1000)
-//
-//   let char = store.npcs.find(n => n.dialogue.indexOf(item.name) >= 0)
-//
-//   let npcs = document.querySelectorAll(`img[src="${char.img}"]`)
-//   npcs.forEach(npc => {
-//     npc.classList.add("fadeout-npc")
-//     let setFound = store.npcs.find(n => n.img === npc.getAttribute('src'))
-//     setFound.found = true
-//   })
-
-
-// }
