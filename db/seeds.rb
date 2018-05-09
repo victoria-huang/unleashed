@@ -1,3 +1,5 @@
+require 'faker'
+Location.delete_all
 
 Location.create!([
   {street: "14", ave: "1", latitude: 40.7312857466366, longitude: -73.9826037269086},
@@ -91,27 +93,94 @@ Location.create!([
   {street: "23", ave: "8", latitude: 40.7453289064188, longitude: -73.9984444342554},
   {street: "23", ave: "9", latitude: 40.7464930866521, longitude: -74.0013804472983}
 ])
-DogCollectable.create!([
-  {name: "Peanut Butter Biscuit", img: "images/collectables/biscuit_1.png", location_id: 131},
-  {name: "Soft Chew Toy", img: "images/collectables/toy_3.png", location_id: 143},
-  {name: "Woody Costume", img: "images/collectables/costume_1.png", location_id: 129},
-  {name: "Dog Bone", img: "images/collectables/bone_2.png", location_id: 147},
-  {name: "Comfy Bed", img: "images/collectables/dog_bed.png", location_id: 140},
-  {name: "Chase the Shiba", img: "images/collectables/shiba.gif", location_id: 113},
-  {name: "Tennis Ball", img: "images/collectables/tennis_ball.png", location_id: 194},
-  {name: "Stick", img: "images/collectables/stick.png", location_id: 156},
-  {name: "Annoying Dog", img: "images/collectables/annoying.gif", location_id: 171},
-  {name: "Lana Del Corgi", img: "images/collectables/corgi.gif", location_id: 187}
-])
-Npc.create!([
-  {name: "Jedediah Ullrich", dialogue: "There's a(n) Peanut Butter Biscuit 2 streets away and 2 avenues away", img: "images/people/s1.png", location_id: 151},
-  {name: "Crystel Lueilwitz", dialogue: "There's a(n) Soft Chew Toy 2 streets away and 3 avenues away", img: "images/people/s2.png", location_id: 158},
-  {name: "Letitia Konopelski", dialogue: "There's a(n) Woody Costume 3 streets away and 3 avenues away", img: "images/people/s3.png", location_id: 159},
-  {name: "Dagmar Tremblay", dialogue: "There's a(n) Dog Bone 3 streets away and 1 avenue away", img: "images/people/s4.png", location_id: 175},
-  {name: "Dr. Max Connelly", dialogue: "There's a(n) Comfy Bed 3 streets away and 3 avenues away", img: "images/people/s5.png", location_id: 170},
-  {name: "Maximus Klein Sr.", dialogue: "There's a(n) Chase the Shiba 1 street away and 3 avenues away", img: "images/people/s6.png", location_id: 125},
-  {name: "Jena Langworth", dialogue: "There's a(n) Tennis Ball 3 streets away and 2 avenues away", img: "images/people/s7.png", location_id: 169},
-  {name: "Dr. Marina Langosh", dialogue: "There's a(n) Stick 1 street away and 1 avenue away", img: "images/people/s8.png", location_id: 166},
-  {name: "Houston Hettinger", dialogue: "There's a(n) Annoying Dog 3 streets away and 2 avenues away", img: "images/people/s9.png", location_id: 196},
-  {name: "Dr. Stanley Swift", dialogue: "There's a(n) Lana Del Corgi 2 streets away and 2 avenues away", img: "images/people/s10.png", location_id: 171}
-])
+
+Npc.delete_all
+DogCollectable.delete_all
+
+def getRandomLocationId
+  rand = Location.offset(rand(Location.count)).first.id
+  while DogCollectable.find_by(location_id: rand)
+    rand = Location.offset(rand(Location.count)).first.id
+  end
+  rand
+end
+
+c1 = DogCollectable.create(name: 'a Peanut Butter Biscuit', img: 'images/collectables/biscuit_1.png', location_id: getRandomLocationId())
+c2 = DogCollectable.create(name: 'a Soft Chew Toy', img: 'images/collectables/toy_3.png', location_id: getRandomLocationId())
+c3 = DogCollectable.create(name: 'a Woody Costume', img: 'images/collectables/costume_1.png', location_id: getRandomLocationId())
+
+c4 = DogCollectable.create(name: 'a Dog Bone', img: 'images/collectables/bone_2.png', location_id: getRandomLocationId())
+c5 = DogCollectable.create(name: 'a Comfy Bed', img: 'images/collectables/dog_bed.png', location_id: getRandomLocationId())
+c6 = DogCollectable.create(name: 'your friend, Chase the Shiba,', img: 'images/collectables/shiba.gif', location_id: getRandomLocationId())
+
+c7 = DogCollectable.create(name: 'a Tennis Ball', img: 'images/collectables/tennis_ball.png', location_id: getRandomLocationId())
+c8 = DogCollectable.create(name: 'a Stick', img: 'images/collectables/stick.png', location_id: getRandomLocationId())
+c9 = DogCollectable.create(name: 'your friend, Annoying Dog,', img: 'images/collectables/annoying.gif', location_id: getRandomLocationId())
+
+c10 = DogCollectable.create(name: 'your friend, Lana Del Corgi,', img: 'images/collectables/corgi.gif', location_id: getRandomLocationId())
+
+collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
+
+def validLocation(collectable, str, ave)
+  oldLoc = Location.find(collectable.location_id)
+  a = oldLoc.ave
+  st = oldLoc.street
+
+  if(Location.find_by(ave: "#{a.to_i + ave}"))
+    new_ave = a.to_i + ave
+  else
+    new_ave = a.to_i - ave
+  end
+
+  if(Location.find_by(street: "#{st.to_i + str}"))
+    new_str = st.to_i + str
+  else
+    new_str = st.to_i - str
+  end
+
+  Location.find_by(street: new_str, ave: new_ave)
+end
+
+collectables.each_with_index do |collectable, i|
+  str = rand(1...4)
+  ave = rand(1...4)
+
+  loc = validLocation(collectable, str, ave)
+
+  while DogCollectable.find_by(location_id: loc.id)
+    str = rand(1...4)
+    ave = rand(1...4)
+
+    loc = validLocation(collectable, str, ave)
+  end
+
+  Npc.create(name: Faker::Name.name, dialogue: "I think I saw #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
+end
+
+
+
+# DogCollectable.create!([
+#   {name: "Peanut Butter Biscuit", img: "images/collectables/biscuit_1.png", location_id: 131},
+#   {name: "Soft Chew Toy", img: "images/collectables/toy_3.png", location_id: 143},
+#   {name: "Woody Costume", img: "images/collectables/costume_1.png", location_id: 129},
+#   {name: "Dog Bone", img: "images/collectables/bone_2.png", location_id: 147},
+#   {name: "Comfy Bed", img: "images/collectables/dog_bed.png", location_id: 140},
+#   {name: "Chase the Shiba", img: "images/collectables/shiba.gif", location_id: 113},
+#   {name: "Tennis Ball", img: "images/collectables/tennis_ball.png", location_id: 194},
+#   {name: "Stick", img: "images/collectables/stick.png", location_id: 156},
+#   {name: "Annoying Dog", img: "images/collectables/annoying.gif", location_id: 171},
+#   {name: "Lana Del Corgi", img: "images/collectables/corgi.gif", location_id: 187}
+# ])
+#
+# Npc.create!([
+#   {name: "Jedediah Ullrich", dialogue: "There's a(n) Peanut Butter Biscuit 2 streets away and 2 avenues away", img: "images/people/s1.png", location_id: 151},
+#   {name: "Crystel Lueilwitz", dialogue: "There's a(n) Soft Chew Toy 2 streets away and 3 avenues away", img: "images/people/s2.png", location_id: 158},
+#   {name: "Letitia Konopelski", dialogue: "There's a(n) Woody Costume 3 streets away and 3 avenues away", img: "images/people/s3.png", location_id: 159},
+#   {name: "Dagmar Tremblay", dialogue: "There's a(n) Dog Bone 3 streets away and 1 avenue away", img: "images/people/s4.png", location_id: 175},
+#   {name: "Dr. Max Connelly", dialogue: "There's a(n) Comfy Bed 3 streets away and 3 avenues away", img: "images/people/s5.png", location_id: 170},
+#   {name: "Maximus Klein Sr.", dialogue: "There's a(n) Chase the Shiba 1 street away and 3 avenues away", img: "images/people/s6.png", location_id: 125},
+#   {name: "Jena Langworth", dialogue: "There's a(n) Tennis Ball 3 streets away and 2 avenues away", img: "images/people/s7.png", location_id: 169},
+#   {name: "Dr. Marina Langosh", dialogue: "There's a(n) Stick 1 street away and 1 avenue away", img: "images/people/s8.png", location_id: 166},
+#   {name: "Houston Hettinger", dialogue: "There's a(n) Annoying Dog 3 streets away and 2 avenues away", img: "images/people/s9.png", location_id: 196},
+#   {name: "Dr. Stanley Swift", dialogue: "There's a(n) Lana Del Corgi 2 streets away and 2 avenues away", img: "images/people/s10.png", location_id: 171}
+# ])
