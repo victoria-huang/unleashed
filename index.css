@@ -140,3 +140,13 @@ html, body {
     opacity: 1;
   }
 }
+
+.main-img{
+    position:relative;
+}
+
+.inlay{
+    position:absolute;
+    top:40px;
+    right:50px;
+}
