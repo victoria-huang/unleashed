@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
   const modal = document.getElementById('modal-container')
-  const list = document.getElementById('collectables')
+  const inventory = document.getElementById('collectables')
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
 
@@ -74,15 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navBar.addEventListener('click', (e) => {
     if (e.target.innerText === 'Checklist') {
-      console.log('checklist clicked')
       $('#modal-container').modal('show');
     }
-    console.log(store.dogCollectables)
-    store.dogCollectables.forEach((item) => {
-      let li = document.createElement('li')
-      li.innerText = item.name
-      list.appendChild(li)
-    })
+    // console.log(store.dogCollectables)
+    // store.dogCollectables.forEach((item) => {
+    //   let div = document.createElement('div')
+    //   div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
+    //   inventory.appendChild(div)
+    // })
   })
 
 })
@@ -94,6 +93,7 @@ function checkOnStep(textBox) {
   )
   if (item) {
     foundItem(item);
+    item.addToInventory();
     DogCollectable.removeItem(item);
   }
 
