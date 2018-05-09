@@ -1,15 +1,4 @@
-DogCollectable.create!([
-  {name: "Peanut Butter Biscuit", img: "images/collectables/biscuit_1.png", location_id: 131},
-  {name: "Soft Chew Toy", img: "images/collectables/toy_3.png", location_id: 143},
-  {name: "Woody Costume", img: "images/collectables/costume_1.png", location_id: 129},
-  {name: "Dog Bone", img: "images/collectables/bone_2.png", location_id: 147},
-  {name: "Comfy Bed", img: "images/collectables/dog_bed.png", location_id: 140},
-  {name: "Chase the Shiba", img: "images/collectables/shiba.gif", location_id: 113},
-  {name: "Tennis Ball", img: "images/collectables/tennis_ball.png", location_id: 194},
-  {name: "Stick", img: "images/collectables/stick.png", location_id: 156},
-  {name: "Annoying Dog", img: "images/collectables/annoying.gif", location_id: 171},
-  {name: "Lana Del Corgi", img: "images/collectables/corgi.gif", location_id: 187}
-])
+
 Location.create!([
   {street: "14", ave: "1", latitude: 40.7312857466366, longitude: -73.9826037269086},
   {street: "14", ave: "2", latitude: 40.7322942931704, longitude: -73.9849426131696},
@@ -101,6 +90,18 @@ Location.create!([
   {street: "23", ave: "7", latitude: 40.7441253914091, longitude: -73.9957193098962},
   {street: "23", ave: "8", latitude: 40.7453289064188, longitude: -73.9984444342554},
   {street: "23", ave: "9", latitude: 40.7464930866521, longitude: -74.0013804472983}
+])
+DogCollectable.create!([
+  {name: "Peanut Butter Biscuit", img: "images/collectables/biscuit_1.png", location_id: 131},
+  {name: "Soft Chew Toy", img: "images/collectables/toy_3.png", location_id: 143},
+  {name: "Woody Costume", img: "images/collectables/costume_1.png", location_id: 129},
+  {name: "Dog Bone", img: "images/collectables/bone_2.png", location_id: 147},
+  {name: "Comfy Bed", img: "images/collectables/dog_bed.png", location_id: 140},
+  {name: "Chase the Shiba", img: "images/collectables/shiba.gif", location_id: 113},
+  {name: "Tennis Ball", img: "images/collectables/tennis_ball.png", location_id: 194},
+  {name: "Stick", img: "images/collectables/stick.png", location_id: 156},
+  {name: "Annoying Dog", img: "images/collectables/annoying.gif", location_id: 171},
+  {name: "Lana Del Corgi", img: "images/collectables/corgi.gif", location_id: 187}
 ])
 Npc.create!([
   {name: "Jedediah Ullrich", dialogue: "There's a(n) Peanut Butter Biscuit 2 streets away and 2 avenues away", img: "images/people/s1.png", location_id: 151},

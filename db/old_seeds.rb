@@ -56,16 +56,14 @@ c10 = DogCollectable.create(name: 'Lana Del Corgi', img: 'images/collectables/co
 
 collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
 
-collectables.each_with_index do |collectable, i|
+def validLocation
   str = rand(1...4)
   ave = rand(1...4)
 
   oldLoc = Location.find(collectable.location_id)
   a = oldLoc.ave
   st = oldLoc.street
-  # byebug
-  # new_ave = 0
-  # new_street = 0
+
   if(Location.find_by(ave: "#{a.to_i + ave}"))
     new_ave = a.to_i + ave
   else
@@ -77,7 +75,15 @@ collectables.each_with_index do |collectable, i|
   else
     new_str = st.to_i - str
   end
+  Location.find_by(street: new_str, ave: new_ave)
+end
 
-  loc = Location.find_by(street: new_str, ave: new_ave)
+collectables.each_with_index do |collectable, i|
+
+  loc = validLocation()
+  while(DogCollectable.find_by(location_id: loc.id))
+    loc = validLocation()
+  end
+
   Npc.create(name: Faker::Name.name, dialogue: "There's a(n) #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
 end
