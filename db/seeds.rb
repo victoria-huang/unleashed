@@ -343,11 +343,11 @@ Npc.delete_all
 DogCollectable.delete_all
 
 def getRandomLocationId
-  rand = Location.offset(rand(Location.count)).first.id
-  while DogCollectable.find_by(location_id: rand) && Npc.find_by(location_id: rand)
-    rand = Location.offset(rand(Location.count)).first.id
+  loc = Location.offset(rand(Location.count)).first.id
+  while DogCollectable.find_by(location_id: rand)
+    loc = Location.offset(rand(Location.count)).first.id
   end
-  rand
+  loc
 end
 
 c1 = DogCollectable.create(name: 'a Peanut Butter Biscuit', img: 'images/collectables/biscuit_1.png', location_id: getRandomLocationId())
@@ -392,7 +392,7 @@ collectables.each_with_index do |collectable, i|
 
   loc = validLocation(collectable, str, ave)
 
-  while DogCollectable.find_by(location_id: loc.id) && Npc.find_by(location_id: loc.id)
+  while DogCollectable.find_by(location_id: loc.id) || Npc.find_by(location_id: loc.id)
     str = rand(1...4)
     ave = rand(1...4)
 
