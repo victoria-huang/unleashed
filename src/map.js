@@ -16,7 +16,11 @@ function mapInit(data) {
     iconUrl: 'images/dog/pug2.gif',
     iconSize: [80, 50]
   });
-  myMarker = L.marker([data.latitude, data.longitude], {autoPan: true, autoPanSpeed: 10, icon: myIcon}).addTo(mymap)
+  myMarker = L.marker([data.latitude, data.longitude], {
+    autoPan: true,
+    autoPanSpeed: 10,
+    icon: myIcon
+  }).addTo(mymap)
 
 }
 
@@ -29,10 +33,29 @@ function moveTo(data) {
 
 function outOfBounds() {
   myMarker.bindPopup("I can't move that way!").openPopup();
-  setTimeout(function(){mymap.closePopup()}, 5000)
+  setTimeout(function() {
+    mymap.closePopup()
+  }, 2000)
 }
 
 function foundItem(item) {
+  playGetCollectableNoise()
+
+  let greenIcon = L.icon({
+    iconUrl: `${item.img}`,
+    iconSize: [25, 25]
+  })
+
   myMarker.bindPopup(`I found <b>${item.name}</b>! <img src=${item.img} width="50" height="50">`).openPopup();
-  setTimeout(function(){mymap.closePopup()}, 5000)
+  setTimeout(() => mymap.closePopup(), 1300)
+
+  L.marker([dogLocation.latitude, dogLocation.longitude], {
+    icon: greenIcon
+  }).addTo(mymap);
+
+  stop = true
+  setTimeout(() => {stop = false}, 1000)
+
+
+
 }

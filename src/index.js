@@ -1,6 +1,7 @@
 const npcAdapter = new Adapter("http://localhost:3000/api/v1/npcs");
 const locationAdapter = new Adapter("http://localhost:3000/api/v1/locations")
 const collectableAdapter = new Adapter("http://localhost:3000/api/v1/dog_collectables")
+let stop = false;
 
 let store = {
   inventory: [],
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
 
+
   // load all locations
   locationAdapter.getResources().then((locations) => {
     locations.forEach(l => new Location(l))
@@ -40,28 +42,29 @@ document.addEventListener('DOMContentLoaded', () => {
   mapInit(dogLocation)
 
   document.addEventListener('keyup', (e) => {
-    let press = false;
     textBox.className = "invisible"
     npcBox.className = "invisible"
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      let street = e.key === "ArrowDown" ? parseInt(dogLocation.street) - 1 : parseInt(dogLocation.street) + 1
-      if (isValidMove(street, dogLocation.ave)) {
-        dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
-        moveTo(dogLocation)
-        checkOnStep(textBox, npcBox)
-      } else {
-        playWallBump()
-        outOfBounds()
-      }
-    } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-      let avenue = e.key === "ArrowLeft" ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
-      if (isValidMove(dogLocation.street, avenue)) {
-        dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
-        moveTo(dogLocation)
-        checkOnStep(textBox, npcBox)
-      } else {
-        playWallBump()
-        outOfBounds()
+    if (!stop) {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        let street = e.key === "ArrowDown" ? parseInt(dogLocation.street) - 1 : parseInt(dogLocation.street) + 1
+        if (isValidMove(street, dogLocation.ave)) {
+          dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
+          moveTo(dogLocation)
+          checkOnStep(textBox)
+        } else {
+          playWallBump()
+          outOfBounds()
+        }
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        let avenue = e.key === "ArrowLeft" ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
+        if (isValidMove(dogLocation.street, avenue)) {
+          dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
+          moveTo(dogLocation)
+          checkOnStep(textBox)
+        } else {
+          playWallBump()
+          outOfBounds()
+        }
       }
     }
 
@@ -84,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-function checkOnStep(textBox){
+function checkOnStep(textBox) {
 
   let item = store.dogCollectables.find(c =>
     (c.location.latitude === dogLocation.latitude && c.location.longitude === dogLocation.longitude)
   )
-  if(item){
+  if (item) {
     foundItem(item);
     DogCollectable.removeItem(item);
   }
