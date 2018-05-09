@@ -46,7 +46,7 @@ class Api::V1::LocationsController < ApplicationController
 
   def getRandomLocationId
     loc = Location.offset(rand(Location.count)).first.id
-    while DogCollectable.find_by(location_id: rand)
+    while DogCollectable.find_by(location_id: loc)
       loc = Location.offset(rand(Location.count)).first.id
     end
     loc
@@ -69,7 +69,7 @@ class Api::V1::LocationsController < ApplicationController
                 st.to_i - str
               end
 
-    Location.find_by(street: new_str, ave: new_ave)
+    Location.find_by(street: new_str.to_s, ave: new_ave.to_s)
   end
 
   def reset_npcs_and_collectables

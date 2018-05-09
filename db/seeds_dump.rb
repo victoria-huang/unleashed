@@ -1,3 +1,5 @@
+Location.create!([
+
 {street: "14", ave: "1", latitude: 40.7312857466366, longitude: -73.9826037269086},
 {street: "14", ave: "2", latitude: 40.7322942931704, longitude: -73.9849426131696},
 {street: "14", ave: "3", latitude: 40.7332702913897, longitude: -73.9871312957257},
