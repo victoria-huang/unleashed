@@ -20,9 +20,11 @@ function toggleSound() {
     bg.muted = false;
     wallBump.muted = false;
     find.muted = false;
+    hello.muted = false;
   } else {
     bg.muted = true;
     wallBump.muted = true;
     find.muted = true;
+    hello.muted = true;
   }
 }
