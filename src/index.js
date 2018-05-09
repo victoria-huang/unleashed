@@ -70,6 +70,15 @@ document.addEventListener('DOMContentLoaded', () => {
           playWallBump()
           outOfBounds()
         }
+      } else if (e.key === " ") {
+        //speed text up
+        let npc = store.npcs.find(c => c.location.id === dogLocation.id)
+        if (npc && !npc.found) {
+          textBox.className = "visible"
+          textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
+          let slowText = document.getElementById('slow-text')
+          slowText.innerText = npc.dialogue
+        }
       }
     }
   })
@@ -94,15 +103,11 @@ function checkOnStep(textBox) {
   }
 
   let npc = store.npcs.find(c => c.location.id === dogLocation.id)
-  if (npc) {
-    console.log(npc)
-
-    //load text
-    textBox.className = "visible "
+  if (npc && !npc.found) {
+    textBox.className = "visible"
     textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
     let slowText = document.getElementById('slow-text')
     showText(slowText, npc.dialogue, 0, 75);
-
   }
 }
 

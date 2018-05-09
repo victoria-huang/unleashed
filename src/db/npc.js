@@ -4,6 +4,7 @@ class Npc {
     this.dialogue = npc.dialogue;
     this.img = npc.img;
     this.location = location;
+    this.found = false;
     store.npcs.push(this);
   }
 

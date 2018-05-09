@@ -10,4 +10,6 @@ function playWallBump(){
   wallBump.play()
 }
 
-// https://www.dropbox.com/s/g4movk98zkyj5s3/Found%20Item.mp3?dl=0
+function playBg(){
+  bg.play()
+}
