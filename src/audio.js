@@ -3,6 +3,7 @@ const find = new Audio('https://dl.dropboxusercontent.com/s/6wbiboh8hpalrc4/Item
 const bg = new Audio('https://dl.dropboxusercontent.com/s/bimvvd0g46urrxc/wholetthedogsout.mp3')
 const hello = new Audio('https://dl.dropboxusercontent.com/s/2w54gecma0so2ry/cartoon_character_high_pitched_voice_says_hello.mp3')
 
+
 function playGetCollectableNoise(){
   find.play()
 }
