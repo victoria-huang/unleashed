@@ -1,6 +1,9 @@
-const npcAdapter = new Adapter("http://localhost:3000/api/v1/npcs");
-const locationAdapter = new Adapter("http://localhost:3000/api/v1/locations")
-const collectableAdapter = new Adapter("http://localhost:3000/api/v1/dog_collectables")
+// const npcAdapter = new Adapter("http://localhost:3000/api/v1/npcs");
+// const locationAdapter = new Adapter("http://localhost:3000/api/v1/locations")
+// const collectableAdapter = new Adapter("http://localhost:3000/api/v1/dog_collectables")
+const npcAdapter = new Adapter("https://unleashedbackendapp.herokuapp.com/api/v1/npcs");
+const locationAdapter = new Adapter("https://unleashedbackendapp.herokuapp.com/api/v1/locations")
+const collectableAdapter = new Adapter("https://unleashedbackendapp.herokuapp.com/api/v1/dog_collectables")
 let stop = false;
 
 let store = {
