@@ -111,15 +111,23 @@ html, body {
   float: left;
 }
 
-.leaflet-marker-icon, .leaflet-marker-shadow {
-  -webkit-animation: fadein 2s;
-  /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 2s;
-  /* Firefox < 16 */
-  -ms-animation: fadein 2s;
-  /* Internet Explorer */
-  -o-animation: fadein 2s;
-  /* Opera < 12.1 */
+#tutorial {
+  overflow-y: scroll;
+  height: 300px;
+  width: 400px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  outline: dashed;
+}
+
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
   animation: fadein 2s;
 }
 
