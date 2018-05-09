@@ -99,7 +99,7 @@ DogCollectable.delete_all
 
 def getRandomLocationId
   rand = Location.offset(rand(Location.count)).first.id
-  while DogCollectable.find_by(location_id: rand)
+  while DogCollectable.find_by(location_id: rand) && Npc.find_by(location_id: rand)
     rand = Location.offset(rand(Location.count)).first.id
   end
   rand
@@ -118,9 +118,9 @@ c8 = DogCollectable.create(name: 'a Stick', img: 'images/collectables/stick.png'
 c9 = DogCollectable.create(name: 'your friend, Annoying Dog,', img: 'images/collectables/annoying.gif', location_id: getRandomLocationId())
 
 c10 = DogCollectable.create(name: 'your friend, Lana Del Corgi,', img: 'images/collectables/corgi.gif', location_id: getRandomLocationId())
-
-collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
-
+c11 = DogCollectable.create(name: 'your friend, Christian,', img: 'images/collectables/christian.png', location_id: getRandomLocationId())
+collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
+genders = ['male','male','female','male','female','male','female','female','female','male','male']
 def validLocation(collectable, str, ave)
   oldLoc = Location.find(collectable.location_id)
   a = oldLoc.ave
@@ -154,7 +154,7 @@ collectables.each_with_index do |collectable, i|
     loc = validLocation(collectable, str, ave)
   end
 
-  Npc.create(name: Faker::Name.name, dialogue: "I think I saw #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
+  Npc.create(name: Faker::Name.name(genders[i]), dialogue: "I think I saw #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
 end
 
 
