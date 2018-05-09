@@ -39,7 +39,7 @@ function outOfBounds() {
   myMarker.bindPopup("I can't move that way!").openPopup();
   setTimeout(function() {
     mymap.closePopup()
-  }, 2000)
+  }, 800)
 }
 
 function foundItem(item) {

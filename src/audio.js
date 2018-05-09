@@ -14,3 +14,15 @@ function playBg(){
   bg.loop = true;
   bg.play()
 }
+
+function toggleSound() {
+  if (bg.muted) {
+    bg.muted = false;
+    wallBump.muted = false;
+    find.muted = false;
+  } else {
+    bg.muted = true;
+    wallBump.muted = true;
+    find.muted = true;
+  }
+}
