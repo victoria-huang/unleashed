@@ -85,10 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function checkOnStep(textBox){
-  let item = store.dogCollectables.find(c => c.location.id === dogLocation.id)
-  if (item) {
-    console.log(item)
+
+  let item = store.dogCollectables.find(c =>
+    (c.location.latitude === dogLocation.latitude && c.location.longitude === dogLocation.longitude)
+  )
+  if(item){
+    foundItem(item);
+    DogCollectable.removeItem(item);
   }
+
   let npc = store.npcs.find(c => c.location.id === dogLocation.id)
   if (npc) {
     console.log(npc)

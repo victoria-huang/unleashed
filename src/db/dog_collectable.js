@@ -5,4 +5,10 @@ class DogCollectable {
     this.img = data.img
     this.location = location
   }
+
+  static removeItem(item) {
+    let index = store.dogCollectables.indexOf(item);
+    store.dogCollectables.splice(index, 1);
+
+  }
 }
