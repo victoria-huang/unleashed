@@ -99,6 +99,7 @@ function checkOnStep(textBox) {
 
   let npc = store.npcs.find(c => c.location.id === dogLocation.id)
   if (npc && !npc.found) {
+    playHello()
     textBox.className = "visible"
     textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
     let slowText = document.getElementById('slow-text')
@@ -107,7 +108,7 @@ function checkOnStep(textBox) {
 }
 
 function isValidMove(street, ave) {
-  return street < 24 && street > 13 && ave < 10 && ave > 0
+  return street < 51 && street > 13 && ave < 10 && ave > 0
 }
 
 function on() {
