@@ -1,5 +1,5 @@
 class DogCollectable {
-  constructor(data, location){
+  constructor(data, location) {
     this.id = data.id
     this.name = data.name.replace(/your friend/g, '').replace(/,/g, '').replace(/^(a )/g, '')
     this.img = data.img
@@ -19,6 +19,7 @@ class DogCollectable {
       let overlayText = document.getElementById("reload-text")
       overlayText.innerHTML = "<h1>CONGRATULATIONS! YOU WON!</h1><h3>Click Anywhere to Play Again!</h3>"
       document.getElementById("reload").style.display = "block";
+      fetch('http://localhost:3000/api/v1/locations/reset').then(r => r.json()).then(console.log)
     }
   }
 }
