@@ -210,5 +210,5 @@ html, body {
 }
 
 #title {
-    animation: pulse 2s linear 1;
+    animation: pulse 2s linear infinite;
 }
