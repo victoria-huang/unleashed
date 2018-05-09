@@ -17,10 +17,10 @@ let dogLocation = {
   latitude: 40.7312857466366
 }
 
-
-window.addEventListener("load", () => {
-  document.getElementById("overlay").style.display = "block";
-})
+// 
+// window.addEventListener("load", () => {
+//   document.getElementById("overlay").style.display = "block";
+// })
 
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
@@ -29,66 +29,68 @@ document.addEventListener('DOMContentLoaded', () => {
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
 
-  playBg()
 
-  // load all locations
-  locationAdapter.getResources().then((locations) => {
-    locations.forEach(l => new Location(l))
-  }).then(locations => {
-    store.dogCollectables.forEach((item) => {
-      let div = document.createElement('div')
-      div.setAttribute('id', `item-id-${item.id}`)
-      div.setAttribute('class', 'main-img')
-      div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
-      checklist.appendChild(div)
-    })
-    store.npcs.forEach(npc => npc.getMarker())
-  })
 
+  // playBg()
+  //
+  // // load all locations
+  // locationAdapter.getResources().then((locations) => {
+  //   locations.forEach(l => new Location(l))
+  // }).then(locations => {
+  //   store.dogCollectables.forEach((item) => {
+  //     let div = document.createElement('div')
+  //     div.setAttribute('id', `item-id-${item.id}`)
+  //     div.setAttribute('class', 'main-img')
+  //     div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
+  //     checklist.appendChild(div)
+  //   })
+  //   store.npcs.forEach(npc => npc.getMarker())
+  // })
+  //
   mapInit(dogLocation)
-
-  document.addEventListener('keyup', (e) => {
-    textBox.className = "invisible"
-    npcBox.className = "invisible"
-    if (!stop) {
-      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        let street = e.key === "ArrowDown" ? parseInt(dogLocation.street) - 1 : parseInt(dogLocation.street) + 1
-        if (isValidMove(street, dogLocation.ave)) {
-          dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
-          moveTo(dogLocation)
-          checkOnStep(textBox)
-        } else {
-          playWallBump()
-          outOfBounds()
-        }
-      } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-        let avenue = e.key === "ArrowLeft" ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
-        if (isValidMove(dogLocation.street, avenue)) {
-          dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
-          moveTo(dogLocation)
-          checkOnStep(textBox)
-        } else {
-          playWallBump()
-          outOfBounds()
-        }
-      } else if (e.key === " ") {
-        //speed text up
-        let npc = store.npcs.find(c => c.location.id === dogLocation.id)
-        if (npc && !npc.found) {
-          textBox.className = "visible"
-          textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
-          let slowText = document.getElementById('slow-text')
-          slowText.innerText = npc.dialogue
-        }
-      }
-    }
-  })
-
-  navBar.addEventListener('click', (e) => {
-    if (e.target.innerText === 'Checklist') {
-      $('#modal-container').modal('show');
-    }
-  })
+  //
+  // document.addEventListener('keyup', (e) => {
+  //   textBox.className = "invisible"
+  //   npcBox.className = "invisible"
+  //   if (!stop) {
+  //     if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+  //       let street = e.key === "ArrowDown" ? parseInt(dogLocation.street) - 1 : parseInt(dogLocation.street) + 1
+  //       if (isValidMove(street, dogLocation.ave)) {
+  //         dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
+  //         moveTo(dogLocation)
+  //         checkOnStep(textBox)
+  //       } else {
+  //         playWallBump()
+  //         outOfBounds()
+  //       }
+  //     } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+  //       let avenue = e.key === "ArrowLeft" ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
+  //       if (isValidMove(dogLocation.street, avenue)) {
+  //         dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
+  //         moveTo(dogLocation)
+  //         checkOnStep(textBox)
+  //       } else {
+  //         playWallBump()
+  //         outOfBounds()
+  //       }
+  //     } else if (e.key === " ") {
+  //       //speed text up
+  //       let npc = store.npcs.find(c => c.location.id === dogLocation.id)
+  //       if (npc && !npc.found) {
+  //         textBox.className = "visible"
+  //         textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
+  //         let slowText = document.getElementById('slow-text')
+  //         slowText.innerText = npc.dialogue
+  //       }
+  //     }
+  //   }
+  // })
+  //
+  // navBar.addEventListener('click', (e) => {
+  //   if (e.target.innerText === 'Checklist') {
+  //     $('#modal-container').modal('show');
+  //   }
+  // })
 
 })
 
