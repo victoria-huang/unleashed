@@ -45,11 +45,11 @@ class Api::V1::LocationsController < ApplicationController
   private
 
   def getRandomLocationId
-    rand = Location.offset(rand(Location.count)).first.id
-    while DogCollectable.find_by(location_id: rand) && Npc.find_by(location_id: rand)
-      rand = Location.offset(rand(Location.count)).first.id
+    loc = Location.offset(rand(Location.count)).first.id
+    while DogCollectable.find_by(location_id: rand)
+      loc = Location.offset(rand(Location.count)).first.id
     end
-    rand
+    loc
   end
 
   def validLocation(collectable, str, ave)
@@ -98,7 +98,7 @@ class Api::V1::LocationsController < ApplicationController
 
       loc = validLocation(collectable, str, ave)
 
-      while DogCollectable.find_by(location_id: loc.id) && Npc.find_by(location_id: loc.id)
+      while DogCollectable.find_by(location_id: loc.id) || Npc.find_by(location_id: loc.id)
         str = rand(1...4)
         ave = rand(1...4)
 
