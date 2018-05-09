@@ -49,6 +49,7 @@ function foundItem(item) {
 
   myMarker.bindPopup(`I found <b>${item.name}</b>! <img src=${item.img} width="50" height="50">`).openPopup();
   setTimeout(() => mymap.closePopup(), 1300)
+  
 
   L.marker([dogLocation.latitude, dogLocation.longitude], {
     icon: greenIcon

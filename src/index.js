@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
           playWallBump()
           outOfBounds()
         }
+      } else if(e.key === " "){
+        //speed text up
       }
     }
 
