@@ -9,13 +9,7 @@ let store = {
   dogCollectables: []
 }
 
-let dogLocation = {
-  id: 109,
-  street: "14",
-  ave: "1",
-  longitude: -73.9826037269086,
-  latitude: 40.7312857466366
-}
+let dogLocation = {}
 
 
 window.addEventListener("load", () => {
@@ -42,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
       div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
       checklist.appendChild(div)
     })
+    dogLocation = store.locations.find(l => l.empty)
+    mapInit(dogLocation)
     store.npcs.forEach(npc => npc.getMarker())
   })
-
-  mapInit(dogLocation)
 
   document.addEventListener('keyup', (e) => {
     textBox.className = "invisible"

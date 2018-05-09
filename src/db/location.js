@@ -5,6 +5,7 @@ class Location {
     this.ave = data.ave
     this.longitude = data.longitude
     this.latitude = data.latitude
+    this.empty = data.npcs.length < 1 && data.dog_collectables.length < 1
     data.npcs.forEach(npc => {
       store.npcs.push(new Npc(npc, this))
     })

@@ -2,6 +2,7 @@ let mymarker;
 let mymap;
 
 function mapInit(data) {
+  console.log(data)
   mymap = L.map('map', {
     zoomControl: false
   }).setView([data.latitude, data.longitude], 17);
