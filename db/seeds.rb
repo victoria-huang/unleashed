@@ -147,7 +147,7 @@ collectables.each_with_index do |collectable, i|
 
   loc = validLocation(collectable, str, ave)
 
-  while DogCollectable.find_by(location_id: loc.id)
+  while DogCollectable.find_by(location_id: loc.id) && Npc.find_by(location_id: loc.id)
     str = rand(1...4)
     ave = rand(1...4)
 
