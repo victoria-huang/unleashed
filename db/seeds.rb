@@ -150,13 +150,8 @@ c10 = DogCollectable.create(name: 'your friend, Lana Del Corgi,', img: 'images/c
 # c20 = DogCollectable.create(name: 'Lana Del Corgi', img: 'app/assets/images/dogs/corgi.gif', location_id: 270)
 
 collectables = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10] #, c11, c12, c13, c14] #, c15, c16, c17, c18, c19, c20]
-str = 0
-ave = 0
 
-def validLocation(collectable)
-  str = rand(1...4)
-  ave = rand(1...4)
-
+def validLocation(collectable, str, ave)
   oldLoc = Location.find(collectable.location_id)
   a = oldLoc.ave
   st = oldLoc.street
@@ -172,17 +167,24 @@ def validLocation(collectable)
   else
     new_str = st.to_i - str
   end
+
   Location.find_by(street: new_str, ave: new_ave)
 end
 
 collectables.each_with_index do |collectable, i|
+  str = rand(1...4)
+  ave = rand(1...4)
 
-  loc = validLocation(collectable)
-  while(DogCollectable.find_by(location_id: loc.id))
-    loc = validLocation(collectable)
+  loc = validLocation(collectable, str, ave)
+
+  while DogCollectable.find_by(location_id: loc.id)
+    str = rand(1...4)
+    ave = rand(1...4)
+
+    loc = validLocation(collectable, str, ave)
   end
 
-  Npc.create(name: Faker::Name.name, dialogue: "There's a(n) #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
+  Npc.create(name: Faker::Name.name, dialogue: "I think I saw #{collectable.name} #{str} #{str > 1 ? 'streets' : 'street'} away and #{ave} #{ave > 1 ? 'avenues' : 'avenue'} away", img: "images/people/s#{i + 1}.png", location_id: loc.id)
 end
 
 
