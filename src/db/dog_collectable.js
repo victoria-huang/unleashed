@@ -16,5 +16,11 @@ class DogCollectable {
   static removeItem(item) {
     let index = store.dogCollectables.indexOf(item);
     store.dogCollectables.splice(index, 1);
+
+    if (store.dogCollectables.length === 0) {
+      let overlayText = document.getElementById("reload-text")
+      overlayText.innerHTML = "<h1>CONGRATULATIONS! YOU WON!</h1><h3>Click Anywhere to Play Again!</h3>"
+      document.getElementById("reload").style.display = "block";
+    }
   }
 }
