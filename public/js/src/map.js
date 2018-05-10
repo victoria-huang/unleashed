@@ -9,14 +9,18 @@ function mapInit(data) {
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 16,
     zoomControl: false,
-    dragging: false,
-    tap: false,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoicmVkZmlzaDA3IiwiYSI6ImNqZ3hzbDNrMDI5NjUzM3Axcm90N2o2NmcifQ.HjxYG61ovRMiydlM3AkfPQ'
   }).addTo(mymap);
 
   mymap.scrollWheelZoom.disable()
   mymap.keyboard.disable();
+  mymap.touchZoom.disable();
+  mymap.doubleClickZoom.disable();
+  mymap.scrollWheelZoom.disable();
+  mymap.boxZoom.disable();
+  mymap.keyboard.disable();
+  $(".leaflet-control-zoom").css("visibility", "hidden");
 
   var myIcon = L.icon({
     iconUrl: 'images/dog/pug2.gif',
