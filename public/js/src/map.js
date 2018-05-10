@@ -8,6 +8,7 @@ function mapInit(data) {
   }).setView([data.latitude, data.longitude], 17);
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 16,
+    zoomControl: false,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoicmVkZmlzaDA3IiwiYSI6ImNqZ3hzbDNrMDI5NjUzM3Axcm90N2o2NmcifQ.HjxYG61ovRMiydlM3AkfPQ'
   }).addTo(mymap);
