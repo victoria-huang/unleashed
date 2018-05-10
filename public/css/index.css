@@ -8,6 +8,11 @@ html, body {
   background-attachment: fixed;
   /* background-position: bottom; */
   background-position: right 20px bottom 10px;
+  text-align:center;
+}
+
+.margin{
+  width:100%
 }
 
 #scroll {
@@ -130,15 +135,15 @@ html, body {
 }
 
 #collectables {
-  width: 400px;
-  height: 300px;
   margin: 0 auto;
   position: relative;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 #collectables div {
-  width: 100px;
-  height: 150px;
+  margin:1em 1em;
+  /* margin-right:1em; */
   float: left;
 }
 
@@ -175,7 +180,11 @@ html, body {
 }
 
 .main-img {
-  position: relative;
+  /* position: relative; */
+  width: auto;
+height: auto;
+max-width: 100%;
+max-height: 100%;
 }
 
 .inlay {
@@ -273,6 +282,7 @@ html, body {
 @media only screen and (max-width: 700px) {
   html, body {
     font-size: 1em;
+    text-align:center;
   }
   .title {
     font-size: 1em;
@@ -299,9 +309,9 @@ html, body {
   .style-name-tag {
     font-family: 'Gothic A1', sans-serif;
   }
-  .navbar {
+  /* .navbar {
     display: none;
-  }
+  } */
   #map {
     height: 100%;
   }
@@ -313,7 +323,6 @@ html, body {
     float: bottom;
     margin: auto auto;
     visibility: visible;
-    display: grid;
     grid-template-columns: auto auto auto;
     z-index: 1000;
     position: absolute;
@@ -342,24 +351,8 @@ html, body {
     width: 100%;
     padding: 0;
     margin: 0;
+
   }
 }
 
 /* END MOBILE FRIENDLY CODE */
-
-
-
-.navbar-collapse.collapse.off {
-    display: block!important;
-}
-.navbar-collapse.collapse.off ul {
-    margin: 0;
-    padding: 0;
-}
-
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
