@@ -86,4 +86,20 @@ function unlocked() {
   document.getElementById("unlocked").style.display = "block";
   let unlockedText = document.getElementById('unlocked-text');
   unlockedText.innerHTML = "<h4 id='title' align='center'>You've unlocked the secret character!</h4><hr><img src='https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif' class='center'><hr><h5 align='center'>Click anywhere to resume!</h5>"
+
+  let navBar = document.getElementsByClassName('navbar-nav mr-auto')[0]
+  navBar.innerHTML += "<a class='nav-item nav-link' data-toggle='modal' id='change-char'>Transform</a>"
+  document.getElementById('change-char').addEventListener('click', () => {
+    toggleChar();
+  })
+}
+
+function toggleChar() {
+  const markerImg = document.querySelector('#map > div.leaflet-pane.leaflet-map-pane > div.leaflet-pane.leaflet-marker-pane > img:nth-child(1)')
+
+  if (markerImg.src === 'https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif') {
+    markerImg.src = 'https://dl.dropboxusercontent.com/s/mwq7anqrx04k3so/pug2.gif'
+  } else {
+    markerImg.src = 'https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif'
+  }
 }
