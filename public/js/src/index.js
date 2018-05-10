@@ -15,18 +15,18 @@ let store = {
 let dogLocation = {}
 
 
-window.addEventListener("load", () => {
-  document.getElementById("overlay").style.display = "block";
-  //   document.getElementById("title").animate([
-  //   // keyframes
-  //   { transform: 'translateX(0px)' },
-  //   { transform: 'translateX(-300px)' }
-  // ], {
-  //   // timing options
-  //   duration: 3000,
-  //   iterations: 1
-  // });
-})
+// window.addEventListener("load", () => {
+//
+//   //   document.getElementById("title").animate([
+//   //   // keyframes
+//   //   { transform: 'translateX(0px)' },
+//   //   { transform: 'translateX(-300px)' }
+//   // ], {
+//   //   // timing options
+//   //   duration: 3000,
+//   //   iterations: 1
+//   // });
+// })
 
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
@@ -52,7 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dogLocation = store.locations.find(l => l.empty)
     mapInit(dogLocation)
     store.npcs.forEach(npc => npc.getMarker())
+    document.getElementById("overlay").style.display = "block";
     arrowBox.classList.remove("invisible")
+
   })
 
 // arrowBox.classList.remove("invisible")
