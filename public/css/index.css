@@ -284,9 +284,7 @@ html, body {
     width: 6em;
     height: 6em;
   }
-  #scroll {
 
-  }
   #tutorial{
     width:100%;
   }
@@ -317,10 +315,11 @@ html, body {
     visibility: visible;
     display: grid;
     grid-template-columns: auto auto auto;
-    z-index: 990;
-    position: fixed;
+    z-index: 1000;
+    position: absolute;
   }
   #overlay {
+    z-index:1001;
     width: 100%;
   }
   #overlay-text, #reload-text {
@@ -336,6 +335,8 @@ html, body {
   }
   #up, #down, #left, #right {
     margin: auto auto;
+    z-index: 1000;
+
   }
   #modal-container {
     width: 100%;
@@ -345,3 +346,21 @@ html, body {
 }
 
 /* END MOBILE FRIENDLY CODE */
+
+
+
+.navbar-collapse.collapse.off {
+    display: block!important;
+}
+.navbar-collapse.collapse.off ul {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav.no-collapse>li,
+.navbar-nav.no-collapse {
+    float: left !important;
+}
+
+.navbar-right.no-collapse {
+    float: right!important;

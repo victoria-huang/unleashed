@@ -14,20 +14,6 @@ let store = {
 
 let dogLocation = {}
 
-
-// window.addEventListener("load", () => {
-//
-//   //   document.getElementById("title").animate([
-//   //   // keyframes
-//   //   { transform: 'translateX(0px)' },
-//   //   { transform: 'translateX(-300px)' }
-//   // ], {
-//   //   // timing options
-//   //   duration: 3000,
-//   //   iterations: 1
-//   // });
-// })
-
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
   const modal = document.getElementById('modal-container')
@@ -35,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
   const arrowBox = document.getElementById('arrowkeys')
-
-  playBg()
 
   // load all locations
   locationAdapter.getResources().then((locations) => {
@@ -49,20 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
       div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
       checklist.appendChild(div)
     })
+
     dogLocation = store.locations.find(l => l.empty)
     mapInit(dogLocation)
     store.npcs.forEach(npc => npc.getMarker())
     document.getElementById("overlay").style.display = "block";
     arrowBox.classList.remove("invisible")
-
+    playBg()
   })
 
-// arrowBox.classList.remove("invisible")
-
   document.addEventListener('touchstart', e => {
-    console.log(e)
+    console.log(e.target)
+    // debugger
     if (!stop) {
       if (e.target.id === 'up' || e.target.id === 'down') {
+        console.log(e.target.id)
         let street = e.target.id === 'up' ? parseInt(dogLocation.street) + 1 : parseInt(dogLocation.street) - 1
         if (isValidMove(street, dogLocation.ave)) {
           dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
@@ -73,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
           outOfBounds()
         }
       } else if (e.target.id === 'left' || e.target.id === 'right') {
-
+        console.log('hitting l and r')
         let avenue = e.target.id === 'left' ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
         if (isValidMove(dogLocation.street, avenue)) {
           dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
@@ -84,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
           outOfBounds()
         }
       } else {
-
         let npc = store.npcs.find(c => c.location.id === dogLocation.id)
         if (npc && !npc.found) {
           if (e.target.id === 'text' || e.target.parentElement.id === 'text') {
@@ -204,8 +188,3 @@ function ordinalSuffix(i) {
   }
   return i + "th";
 }
-
-$('.nav a').on('click', function() {
-  $('.btn-navbar').click(); //bootstrap 2.x
-  $('.navbar-toggle').click() //bootstrap 3.x by Richard
-});
