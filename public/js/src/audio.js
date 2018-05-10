@@ -28,7 +28,7 @@ function toggleSound() {
     find.muted = false;
     hello.muted = false;
   } else {
-    document.querySelector('img#toggle-sound').src = 'https://cdn4.iconfinder.com/data/icons/proglyphs-multimedia/512/Volume_Off-512.png'
+    // document.querySelector('img#toggle-sound').src = 'https://cdn4.iconfinder.com/data/icons/proglyphs-multimedia/512/Volume_Off-512.png'
     bg.muted = true;
     wallBump.muted = true;
     find.muted = true;

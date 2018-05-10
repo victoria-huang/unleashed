@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.innerText === 'Checklist') {
       $('#modal-container').modal('show');
     } else if (e.target === document.querySelector('img#toggle-sound')) {
-      console.log("okay")
       toggleSound();
     }
   })
