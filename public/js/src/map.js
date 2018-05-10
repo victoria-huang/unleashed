@@ -85,5 +85,5 @@ function unlocked() {
   markerImg.src = 'https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif'
   document.getElementById("unlocked").style.display = "block";
   let unlockedText = document.getElementById('unlocked-text');
-  unlockedText.innerHTML = "<h4 id='title' align='center'>You've unlocked a new character!</h4><hr><img src='https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif' class='center'><hr><h5 align='center'>Click anywhere to resume!</h5>"
+  unlockedText.innerHTML = "<h4 id='title' align='center'>You've unlocked the secret character!</h4><hr><img src='https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif' class='center'><hr><h5 align='center'>Click anywhere to resume!</h5>"
 }
