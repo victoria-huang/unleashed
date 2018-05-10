@@ -17,6 +17,7 @@ let store = {
 }
 
 let dogLocation = {}
+let cruellaLocation = {}
 
 document.addEventListener('DOMContentLoaded', () => {
   const navBar = document.getElementById('navbar')
@@ -38,16 +39,20 @@ document.addEventListener('DOMContentLoaded', () => {
       checklist.appendChild(div)
     })
 
+    cruellaLocation = store.locations[Math.floor(Math.random() * store.locations.length)];
     dogLocation = store.locations.find(l => l.empty)
-    mapInit(dogLocation)
+    mapInit(dogLocation, cruellaLocation)
     store.npcs.forEach(npc => npc.getMarker())
     document.getElementById("overlay").style.display = "block";
     arrowBox.classList.remove("invisible")
     playBg()
+
+    setInterval(() => {
+      cruellaLocation = moveCruella(cruellaLocation, dogLocation)
+    }, 2000);
   })
 
   document.addEventListener('touchstart', e => {
-    console.log(e.target)
     // debugger
     if (!stop) {
       if (e.target.id === 'up' || e.target.id === 'down') {

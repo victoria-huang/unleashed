@@ -1,11 +1,12 @@
-let mymarker;
+let myMarker;
 let mymap;
+let cruellaMarker;
 
-function mapInit(data) {
-  console.log(data)
+function mapInit(dogLoc, cruellaLoc) {
+  // console.log(dogLoc)
   mymap = L.map('map', {
     zoomControl: false
-  }).setView([data.latitude, data.longitude], 17);
+  }).setView([dogLoc.latitude, dogLoc.longitude], 17);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 16,
@@ -36,10 +37,21 @@ function mapInit(data) {
     iconSize: [80, 50]
   });
 
-  myMarker = L.marker([data.latitude, data.longitude], {
+  myMarker = L.marker([dogLoc.latitude, dogLoc.longitude], {
     autoPan: true,
     autoPanSpeed: 10,
     icon: myIcon
+  }).addTo(mymap)
+
+  var cruella = L.icon({
+    iconUrl: 'https://dl.dropboxusercontent.com/s/cwps7d02dum7ypj/cruella.gif?dl=0',
+    iconSize: [50, 50]
+  });
+
+  cruellaMarker = L.marker([cruellaLoc.latitude, cruellaLoc.longitude], {
+    autoPan: true,
+    autoPanSpeed: 10,
+    icon: cruella
   }).addTo(mymap)
 }
 
@@ -109,4 +121,58 @@ function toggleChar() {
   } else {
     markerImg.src = 'https://dl.dropboxusercontent.com/s/tjviytubg8zg3s6/unlocked.gif'
   }
+}
+
+function moveCruella(cruella, dog) {
+  let num = Math.round(Math.random());
+
+  if (num === 0) {
+    return moveStreet(cruella, dog);
+  } else {
+    return moveAve(cruella, dog)
+  }
+}
+
+function moveStreet(cruella, dog) {
+  if (parseInt(cruella.street) < parseInt(dog.street) && parseInt(cruella.street) < 50) {
+    newCruella = store.locations.find(l => l.street === `${parseInt(cruella.street) + 1}` && l.ave === cruella.ave)
+    return cruellaMoveTo(newCruella)
+    // console.log("move up street")
+  } else if (parseInt(cruella.street) > parseInt(dog.street) && parseInt(cruella.street) > 14) {
+    newCruella = store.locations.find(l => l.street === `${parseInt(cruella.street) - 1}` && l.ave === cruella.ave)
+    return cruellaMoveTo(newCruella)
+    // console.log("move down street")
+  } else {
+    if (cruella.ave === dog.ave) {
+      // GAME OVER
+      // console.log("game over")
+    } else {
+      return moveAve(cruella, dog);
+    }
+  }
+}
+
+function moveAve(cruella, dog) {
+  if (parseInt(cruella.ave) < parseInt(dog.ave) && parseInt(cruella.ave) < 9) {
+    newCruella = store.locations.find(l => l.street === cruella.street && l.ave === `${parseInt(cruella.ave) + 1}`)
+    return cruellaMoveTo(newCruella)
+    // console.log("move up ave")
+  } else if (parseInt(cruella.ave) > parseInt(dog.ave) && parseInt(cruella.ave) > 1) {
+    newCruella = store.locations.find(l => l.street === cruella.street && l.ave === `${parseInt(cruella.ave) - 1}`)
+    return cruellaMoveTo(newCruella)
+    // console.log("move down ave")
+  } else {
+    if (cruella.street === dog.street) {
+      // GAME OVER
+      // console.log("game over")
+    } else {
+      return moveStreet(cruella, dog);
+    }
+  }
+}
+
+function cruellaMoveTo(data) {
+  // console.log(cruellaMarker)
+  cruellaMarker.setLatLng([data.latitude, data.longitude]).update()
+  return data;
 }
