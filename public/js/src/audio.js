@@ -22,13 +22,13 @@ function playHello(){
 
 function toggleSound() {
   if (bg.muted) {
-    document.querySelector('img#toggle-sound').src = 'https://dl.dropboxusercontent.com/s/q4qti7zght0df7k/soundon.png?dl=0'
+    document.querySelector('img#toggle-sound').src = 'https://dl.dropboxusercontent.com/s/q4qti7zght0df7k/soundon.png'
     bg.muted = false;
     wallBump.muted = false;
     find.muted = false;
     hello.muted = false;
   } else {
-    document.querySelector('img#toggle-sound').src = 'https://dl.dropboxusercontent.com/s/7mnewn5jq639oqf/soundoff.png?dl=0'
+    document.querySelector('img#toggle-sound').src = 'https://dl.dropboxusercontent.com/s/7mnewn5jq639oqf/soundoff.png'
     bg.muted = true;
     wallBump.muted = true;
     find.muted = true;
