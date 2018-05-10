@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     store.dogCollectables.forEach((item) => {
       let div = document.createElement('div')
       div.setAttribute('id', `item-id-${item.id}`)
-      div.setAttribute('class', 'main-img grid-item')
-      div.innerHTML = `<img src=${item.img} class="img-fluid" width="50" height="50"><br>${item.name}`
+      div.setAttribute('class', 'main-img')
+      div.innerHTML = `<img src=${item.img} width="50" height="50"><br>${item.name}`
       checklist.appendChild(div)
     })
 
