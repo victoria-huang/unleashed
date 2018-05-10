@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navBar.addEventListener('click', (e) => {
     if (e.target.innerText === 'Checklist') {
       $('#modal-container').modal('show');
-    } else if (e.target.innerText === 'Toggle Sound') {
+    } else if (e.target === document.querySelector('img#toggle-sound')) {
       toggleSound();
     }
   })
