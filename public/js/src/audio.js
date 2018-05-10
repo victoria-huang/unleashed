@@ -22,7 +22,7 @@ function playHello(){
 
 function toggleSound() {
   if (bg.muted) {
-    document.querySelector('img#toggle-sound').src = 'https://www.freeiconspng.com/uploads/volume-icon-32.png'
+    // document.querySelector('img#toggle-sound').src = 'https://www.freeiconspng.com/uploads/volume-icon-32.png'
     bg.muted = false;
     wallBump.muted = false;
     find.muted = false;
