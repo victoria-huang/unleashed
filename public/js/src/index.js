@@ -17,15 +17,15 @@ let dogLocation = {}
 
 window.addEventListener("load", () => {
   document.getElementById("overlay").style.display = "block";
-//   document.getElementById("title").animate([
-//   // keyframes
-//   { transform: 'translateX(0px)' },
-//   { transform: 'translateX(-300px)' }
-// ], {
-//   // timing options
-//   duration: 3000,
-//   iterations: 1
-// });
+  //   document.getElementById("title").animate([
+  //   // keyframes
+  //   { transform: 'translateX(0px)' },
+  //   { transform: 'translateX(-300px)' }
+  // ], {
+  //   // timing options
+  //   duration: 3000,
+  //   iterations: 1
+  // });
 })
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const checklist = document.getElementById('collectables')
   const textBox = document.getElementById('text')
   const npcBox = document.getElementById('npc')
+  const arrowBox = document.getElementById('arrowkeys')
 
   playBg()
 
@@ -51,6 +52,51 @@ document.addEventListener('DOMContentLoaded', () => {
     dogLocation = store.locations.find(l => l.empty)
     mapInit(dogLocation)
     store.npcs.forEach(npc => npc.getMarker())
+    arrowBox.classList.remove("invisible")
+  })
+
+// arrowBox.classList.remove("invisible")
+
+  document.addEventListener('touchstart', e => {
+    console.log(e)
+    if (!stop) {
+      if (e.target.id === 'up' || e.target.id === 'down') {
+        let street = e.target.id === 'up' ? parseInt(dogLocation.street) + 1 : parseInt(dogLocation.street) - 1
+        if (isValidMove(street, dogLocation.ave)) {
+          dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
+          moveTo(dogLocation)
+          checkOnStep(textBox)
+        } else {
+          playWallBump()
+          outOfBounds()
+        }
+      } else if (e.target.id === 'left' || e.target.id === 'right') {
+
+        let avenue = e.target.id === 'left' ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
+        if (isValidMove(dogLocation.street, avenue)) {
+          dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
+          moveTo(dogLocation)
+          checkOnStep(textBox)
+        } else {
+          playWallBump()
+          outOfBounds()
+        }
+      } else {
+
+        let npc = store.npcs.find(c => c.location.id === dogLocation.id)
+        if (npc && !npc.found) {
+          if (e.target.id === 'text' || e.target.parentElement.id === 'text') {
+            textBox.className = "visible"
+            textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
+            let slowText = document.getElementById('slow-text')
+            slowText.innerText = npc.dialogue
+          } else {
+            textBox.className = "invisible"
+            npcBox.className = "invisible"
+          }
+        }
+      }
+    }
   })
 
   document.addEventListener('keyup', (e) => {
@@ -156,3 +202,8 @@ function ordinalSuffix(i) {
   }
   return i + "th";
 }
+
+$('.nav a').on('click', function() {
+  $('.btn-navbar').click(); //bootstrap 2.x
+  $('.navbar-toggle').click() //bootstrap 3.x by Richard
+});

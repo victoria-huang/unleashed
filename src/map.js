@@ -8,18 +8,9 @@ function mapInit(data) {
   }).setView([data.latitude, data.longitude], 17);
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 16,
-    zoomControl: false,
-    dragging: !L.Browser.mobile,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoicmVkZmlzaDA3IiwiYSI6ImNqZ3hzbDNrMDI5NjUzM3Axcm90N2o2NmcifQ.HjxYG61ovRMiydlM3AkfPQ'
   }).addTo(mymap);
-
-  mymap.touchZoom.disable();
-  mymap.doubleClickZoom.disable();
-  mymap.scrollWheelZoom.disable();
-  mymap.boxZoom.disable();
-  mymap.keyboard.disable();
-  $(".leaflet-control-zoom").css("visibility", "hidden");
 
   mymap.scrollWheelZoom.disable()
   mymap.keyboard.disable();
@@ -32,8 +23,11 @@ function mapInit(data) {
   myMarker = L.marker([data.latitude, data.longitude], {
     autoPan: true,
     autoPanSpeed: 10,
-    icon: myIcon
+    icon: myIcon,
+    zIndexOffset: 1000
   }).addTo(mymap)
+
+
 
 }
 
@@ -51,6 +45,12 @@ function outOfBounds() {
   }, 800)
 }
 
+function setPopupDefault() {
+  debugger
+  count = store.dogCollectables.filter(c => !c.found).length
+  myMarker.bindPopup(`I have ${count} items left to find!`).openPopup();
+}
+
 function foundItem(item) {
   playGetCollectableNoise()
 
@@ -60,10 +60,11 @@ function foundItem(item) {
   })
 
   myMarker.bindPopup(`I found <b>${item.name}</b>! <img src=${item.img} width="50" height="50">`).openPopup();
-  setTimeout(() => mymap.closePopup(), 1300)
+  setTimeout(() => {mymap.closePopup();}, 1300)
 
   L.marker([dogLocation.latitude, dogLocation.longitude], {
-    icon: itemIcon
+    icon: itemIcon,
+    zIndexOffset: 1000
   }).addTo(mymap);
 
   stop = true
@@ -79,6 +80,5 @@ function foundItem(item) {
     let setFound = store.npcs.find(n => n.img === npc.getAttribute('src'))
     setFound.found = true
   })
-
 
 }
