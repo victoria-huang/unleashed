@@ -22,13 +22,13 @@ function playHello(){
 
 function toggleSound() {
   if (bg.muted) {
-    document.querySelector('img#toggle-sound').src = 'https://www.freeiconspng.com/uploads/volume-icon-32.png'
+    document.querySelector('img#toggle-sound').src = 'https://dl.dropboxusercontent.com/s/q4qti7zght0df7k/soundon.png'
     bg.muted = false;
     wallBump.muted = false;
     find.muted = false;
     hello.muted = false;
   } else {
-    document.querySelector('img#toggle-sound').src = 'https://cdn4.iconfinder.com/data/icons/proglyphs-multimedia/512/Volume_Off-512.png'
+    document.querySelector('img#toggle-sound').src = 'https://dl.dropboxusercontent.com/s/7mnewn5jq639oqf/soundoff.png'
     bg.muted = true;
     wallBump.muted = true;
     find.muted = true;

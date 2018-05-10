@@ -6,6 +6,10 @@ const locationAdapter = new Adapter("https://unleashedbackendapp.herokuapp.com/a
 const collectableAdapter = new Adapter("https://unleashedbackendapp.herokuapp.com/api/v1/dog_collectables")
 let stop = false;
 
+let code = "";
+let PASSCODE = "&&((%'%'BA";
+let current = 0;
+
 let store = {
   npcs: [],
   locations: [],
@@ -130,6 +134,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  window.addEventListener('keydown', function(key) {
+    code = String.fromCharCode(key.keyCode || key.which)
+
+    if (code === PASSCODE[current]) {
+      current++;
+    } else {
+      current = 0;
+    }
+
+    if (current === PASSCODE.length) {
+      window.removeEventListener("keydown", arguments.callee);
+      unlocked();
+    }
+  }, false);
+
 })
 
 function checkOnStep(textBox) {
@@ -157,12 +176,13 @@ function isValidMove(street, ave) {
   return street < 51 && street > 13 && ave < 10 && ave > 0
 }
 
-function on() {
-  document.getElementById("overlay").style.display = "block";
-}
+// function on() {
+//   document.getElementById("overlay").style.display = "block";
+// }
 
 function off() {
   document.getElementById("overlay").style.display = "none";
+  document.getElementById("unlocked").style.display = "none";
 }
 
 function showText(target, message, index, interval) {
