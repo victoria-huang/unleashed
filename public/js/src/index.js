@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (npc && !npc.found) {
           if (e.target.id === 'text' || e.target.parentElement.id === 'text') {
             textBox.className = "visible"
-            textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
+            textBox.innerHTML = `<img class="set-left" src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
             let slowText = document.getElementById('slow-text')
             slowText.innerText = npc.dialogue
           } else {
@@ -166,7 +166,7 @@ function checkOnStep(textBox) {
   if (npc && !npc.found) {
     playHello()
     textBox.className = "visible"
-    textBox.innerHTML = `<img src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
+    textBox.innerHTML = `<img class="set-left" src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
     let slowText = document.getElementById('slow-text')
     showText(slowText, npc.dialogue, 0, 75);
   }

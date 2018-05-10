@@ -24,6 +24,11 @@ html, body {
   height: 1em;
 }
 
+.checklist-icon {
+  width: 2em;
+  height: 1em;
+}
+
 #overlay, #reload, #unlocked {
   padding: 1em 1em;
   position: fixed;
@@ -37,6 +42,7 @@ html, body {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   cursor: pointer;
+  text-align: center;
 }
 
 #arrowkeys {
@@ -130,16 +136,19 @@ html, body {
 }
 
 #collectables {
-  width: 400px;
-  height: 300px;
+  width: 90%;
+  height: auto;
   margin: 0 auto;
   position: relative;
+  text-align: center;
 }
 
 #collectables div {
   width: 100px;
   height: 150px;
   float: left;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 #tutorial {
@@ -181,7 +190,7 @@ html, body {
 .inlay {
   position: absolute;
   top: 40px;
-  right: 50px;
+  right:40px;
 }
 
 #reload {
@@ -299,9 +308,10 @@ html, body {
   .style-name-tag {
     font-family: 'Gothic A1', sans-serif;
   }
-  .navbar {
+  /* .navbar {
     display: none;
-  }
+  } */
+
   #map {
     height: 100%;
   }
@@ -347,8 +357,6 @@ html, body {
 
 /* END MOBILE FRIENDLY CODE */
 
-
-
 .navbar-collapse.collapse.off {
     display: block!important;
 }
@@ -362,4 +370,9 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+.modal-body {
+  width: 100%;
+  margin: 0 auto;
 }
