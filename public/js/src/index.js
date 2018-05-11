@@ -10,6 +10,8 @@ let code = "";
 let PASSCODE = "&&((%'%'BA";
 let current = 0;
 
+let cruellaInterval;
+
 let store = {
   npcs: [],
   locations: [],
@@ -40,23 +42,23 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     cruellaLocation = store.locations[Math.floor(Math.random() * store.locations.length)];
+
+    while (cruellaLocation === dogLocation || store.dogCollectables.find(l => l === cruellaLocation) || store.npcs.find(l => l === cruellaLocation)) {
+      cruellaLocation = store.locations[Math.floor(Math.random() * store.locations.length)];
+    }
+
     dogLocation = store.locations.find(l => l.empty)
     mapInit(dogLocation, cruellaLocation)
     store.npcs.forEach(npc => npc.getMarker())
     document.getElementById("overlay").style.display = "block";
     arrowBox.classList.remove("invisible")
     playBg()
-
-    setInterval(() => {
-      cruellaLocation = moveCruella(cruellaLocation, dogLocation)
-    }, 2000);
   })
 
   document.addEventListener('touchstart', e => {
     // debugger
     if (!stop) {
       if (e.target.id === 'up' || e.target.id === 'down') {
-        console.log(e.target.id)
         let street = e.target.id === 'up' ? parseInt(dogLocation.street) + 1 : parseInt(dogLocation.street) - 1
         if (isValidMove(street, dogLocation.ave)) {
           dogLocation = store.locations.find(l => l.street === `${street}` && l.ave === dogLocation.ave)
@@ -67,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
           outOfBounds()
         }
       } else if (e.target.id === 'left' || e.target.id === 'right') {
-        console.log('hitting l and r')
         let avenue = e.target.id === 'left' ? parseInt(dogLocation.ave) + 1 : parseInt(dogLocation.ave) - 1
         if (isValidMove(dogLocation.street, avenue)) {
           dogLocation = store.locations.find(l => l.street === dogLocation.street && l.ave === `${avenue}`)
@@ -133,7 +134,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navBar.addEventListener('click', (e) => {
     if (e.target.innerText === 'Checklist') {
+      if (cruellaInterval) {
+        clearInterval(cruellaInterval);
+      }
+
       $('#modal-container').modal('show');
+
+      let closeButton = document.querySelector('.close');
+      closeButton.addEventListener('click', () => {
+        resumeCruella();
+      })
     } else if (e.target === document.querySelector('img#toggle-sound')) {
       toggleSound();
     }
@@ -157,18 +167,36 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function checkOnStep(textBox) {
+  if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
+    gameOver();
+  }
 
   let item = store.dogCollectables.find(c =>
     (c.location.latitude === dogLocation.latitude && c.location.longitude === dogLocation.longitude)
   )
+
   if (item) {
     foundItem(item);
     item.checkOff();
     DogCollectable.removeItem(item);
+
+    if (store.dogCollectables.length === 7) {
+      cruellaInterval = setInterval(() => {
+        cruellaLocation = moveCruella(cruellaLocation, dogLocation);
+        if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
+          gameOver();
+        }
+      }, 5000);
+    }
   }
 
   let npc = store.npcs.find(c => c.location.id === dogLocation.id)
   if (npc && !npc.found) {
+    if (cruellaInterval) {
+      clearInterval(cruellaInterval);
+      setTimeout(resumeCruella, 30000);
+    }
+
     playHello()
     textBox.className = "visible"
     textBox.innerHTML = `<img class="set-left" src="${npc.img}"><h1 class="style-name-tag">${npc.name}</h1><p id="slow-text" class="style-dialogue"></p>`
@@ -196,6 +224,17 @@ function showText(target, message, index, interval) {
     setTimeout(function() {
       showText(target, message, index, interval);
     }, interval);
+  }
+}
+
+function resumeCruella() {
+  if (cruellaInterval) {
+    cruellaInterval = setInterval(() => {
+      cruellaLocation = moveCruella(cruellaLocation, dogLocation);
+      if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
+        gameOver();
+      }
+    }, 5000);
   }
 }
 

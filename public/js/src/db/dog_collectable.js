@@ -16,10 +16,11 @@ class DogCollectable {
     store.dogCollectables.splice(index, 1);
 
     if (store.dogCollectables.length === 0) {
+      clearInterval(cruellaInterval);
       let overlayText = document.getElementById("reload-text")
       overlayText.innerHTML = "<img src='https://dl.dropboxusercontent.com/s/bpdfenxv7iqy2ek/pug_gif.gif?dl=0'><h3>YAY! YOU WON!</h3><hr><h5>Click Anywhere to Play Again!</h5>"
       document.getElementById("reload").style.display = "block";
-      fetch('https://unleashedbackendapp.herokuapp.com/api/v1/locations/reset').then(r => r.json()).then(console.log)
+      fetch('https://unleashedbackendapp.herokuapp.com/api/v1/locations/reset')
     }
   }
 }

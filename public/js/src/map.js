@@ -144,8 +144,7 @@ function moveStreet(cruella, dog) {
     // console.log("move down street")
   } else {
     if (cruella.ave === dog.ave) {
-      // GAME OVER
-      // console.log("game over")
+      gameOver();
     } else {
       return moveAve(cruella, dog);
     }
@@ -163,8 +162,7 @@ function moveAve(cruella, dog) {
     // console.log("move down ave")
   } else {
     if (cruella.street === dog.street) {
-      // GAME OVER
-      // console.log("game over")
+      gameOver();
     } else {
       return moveStreet(cruella, dog);
     }
@@ -175,4 +173,15 @@ function cruellaMoveTo(data) {
   // console.log(cruellaMarker)
   cruellaMarker.setLatLng([data.latitude, data.longitude]).update()
   return data;
+}
+
+function gameOver() {
+  if (cruellaInterval) {
+    clearInterval(cruellaInterval);
+  }
+
+  let overlayText = document.getElementById("reload-text")
+  overlayText.innerHTML = "<img src='https://dl.dropboxusercontent.com/s/anyyh8bsk1mur5x/sad_pug.gif?dl=0' height='300px' width='200px'><h3>GAME OVER</h3><hr><h5>Cruella found you :(</h5><hr><h5>Click Anywhere to Play Again!</h5>"
+  document.getElementById("reload").style.display = "block";
+  fetch('https://unleashedbackendapp.herokuapp.com/api/v1/locations/reset')
 }
