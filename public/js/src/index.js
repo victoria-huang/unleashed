@@ -41,13 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
       checklist.appendChild(div)
     })
 
-    cruellaLocation = store.locations[Math.floor(Math.random() * store.locations.length)];
 
-    while (cruellaLocation === dogLocation || store.dogCollectables.find(l => l === cruellaLocation) || store.npcs.find(l => l === cruellaLocation)) {
+
+    dogLocation = store.locations.find(l => l.empty)
+    cruellaLocation = dogLocation //store.locations[Math.floor(Math.random() * store.locations.length)];
+
+    while (cruellaLocation === dogLocation) {
       cruellaLocation = store.locations[Math.floor(Math.random() * store.locations.length)];
     }
 
-    dogLocation = store.locations.find(l => l.empty)
     mapInit(dogLocation, cruellaLocation)
     store.npcs.forEach(npc => npc.getMarker())
     document.getElementById("overlay").style.display = "block";
@@ -186,7 +188,7 @@ function checkOnStep(textBox) {
         if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
           gameOver();
         }
-      }, 2000);
+      }, 1500);
     }
   }
 
