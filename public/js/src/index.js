@@ -134,16 +134,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navBar.addEventListener('click', (e) => {
     if (e.target.innerText === 'Checklist') {
-      if (cruellaInterval) {
-        clearInterval(cruellaInterval);
-      }
+      // if (cruellaInterval) {
+      //   clearInterval(cruellaInterval);
+      // }
 
       $('#modal-container').modal('show');
-
-      let closeButton = document.querySelector('.close');
-      closeButton.addEventListener('click', () => {
-        resumeCruella();
-      })
+      //
+      // let closeButton = document.querySelector('.close');
+      // closeButton.addEventListener('click', () => {
+      //   resumeCruella();
+      // })
     } else if (e.target === document.querySelector('img#toggle-sound')) {
       toggleSound();
     }
@@ -186,16 +186,16 @@ function checkOnStep(textBox) {
         if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
           gameOver();
         }
-      }, 3000);
+      }, 2000);
     }
   }
 
   let npc = store.npcs.find(c => c.location.id === dogLocation.id)
   if (npc && !npc.found) {
-    if (cruellaInterval) {
-      clearInterval(cruellaInterval);
-      setTimeout(resumeCruella, 10000);
-    }
+    // if (cruellaInterval) {
+    //   clearInterval(cruellaInterval);
+    //   setTimeout(resumeCruella, 10000);
+    // }
 
     playHello()
     textBox.className = "visible"
@@ -227,16 +227,16 @@ function showText(target, message, index, interval) {
   }
 }
 
-function resumeCruella() {
-  if (cruellaInterval) {
-    cruellaInterval = setInterval(() => {
-      cruellaLocation = moveCruella(cruellaLocation, dogLocation);
-      if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
-        gameOver();
-      }
-    }, 3000);
-  }
-}
+// function resumeCruella() {
+//   if (cruellaInterval) {
+//     cruellaInterval = setInterval(() => {
+//       cruellaLocation = moveCruella(cruellaLocation, dogLocation);
+//       if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
+//         gameOver();
+//       }
+//     }, 3000);
+//   }
+// }
 
 function ordinalSuffix(i) {
   var j = i % 10,
