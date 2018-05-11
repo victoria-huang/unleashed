@@ -186,7 +186,7 @@ function checkOnStep(textBox) {
         if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
           gameOver();
         }
-      }, 5000);
+      }, 3000);
     }
   }
 
@@ -194,7 +194,7 @@ function checkOnStep(textBox) {
   if (npc && !npc.found) {
     if (cruellaInterval) {
       clearInterval(cruellaInterval);
-      setTimeout(resumeCruella, 30000);
+      setTimeout(resumeCruella, 10000);
     }
 
     playHello()
@@ -234,7 +234,7 @@ function resumeCruella() {
       if (cruellaLocation.ave === dogLocation.ave && cruellaLocation.street === dogLocation.street) {
         gameOver();
       }
-    }, 5000);
+    }, 3000);
   }
 }
 
